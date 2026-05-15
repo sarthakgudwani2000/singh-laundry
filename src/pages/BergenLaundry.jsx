@@ -10,6 +10,7 @@ import { ArrowRight, Check, Gift } from "lucide-react";
 import {
   BRAND,
   PRICING,
+  LOCATIONS,
   IMAGES,
   SPECIAL_ITEMS_LIST,
   APP_LINKS,
@@ -85,7 +86,7 @@ export default function BergenLaundry() {
     >
       <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} />
 
-      <section className="container-pad pt-14 md:pt-20 pb-8" data-reveal-blur>
+      <section className="page-hero-section pb-5" data-reveal-blur>
         <p className="overline mb-3">{BRAND.pickup}</p>
         <h1 className="h1 max-w-3xl">Pickup &amp; delivery</h1>
         <span
@@ -95,12 +96,9 @@ export default function BergenLaundry() {
         />
         <p className="mt-5 text-slate-600 text-lg max-w-2xl leading-relaxed">
           <strong>{BRAND.parent}</strong> is the parent company of{" "}
-          <strong>{BRAND.pickup}</strong> and <strong>{BRAND.store}</strong>. This
-          page mirrors the <strong>Bergen Laundry Service</strong> section on our
-          home page. On the previous WordPress site this content lived at{" "}
-          <strong className="whitespace-nowrap">singhlaundry.com/bergenlaundryservice-com/</strong>{" "}
-          and at <strong>bergenlaundryservice.com</strong> — both should route
-          here after DNS moves to this build.
+          <strong>{BRAND.pickup}</strong> and <strong>{BRAND.store}</strong>.
+          Pickup orders are washed, dried, and folded at{" "}
+          <strong>{BRAND.store}</strong>, {LOCATIONS.newBridge.full}.
         </p>
         <p className="mt-5 text-slate-600 text-lg max-w-2xl leading-relaxed">
           $2.15 per pound* / No Charge For Pickup &amp; Delivery / Next Day
@@ -134,19 +132,15 @@ export default function BergenLaundry() {
       </section>
 
       {/* Same “seal + van + FIRST10” row as singhlaundry.com home */}
-      <section className="container-pad pb-10 md:pb-14" data-testid="bergen-home-mirror-promo">
+      <section className="container-pad pb-7 md:pb-9" data-testid="bergen-home-mirror-promo">
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-6 items-center">
           <div className="flex justify-center lg:justify-start" data-reveal>
-            <div className="w-44 h-44 rounded-full border-4 border-slate-900 bg-white flex flex-col items-center justify-center text-center p-4 shadow-xl ring-4 ring-slate-200/80">
-              <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500">
-                Est. 2017
-              </p>
-              <p className="mt-1 font-display text-lg font-bold text-slate-900 leading-tight">
-                Bergen Laundry
-              </p>
-              <p className="mt-1 text-[10px] font-semibold text-slate-600 leading-snug">
-                Your pick up &amp; delivery
-              </p>
+            <div className="w-44 h-44 rounded-full border-4 border-blue-800 bg-gradient-to-br from-sky-50 via-blue-50 to-white flex flex-col items-center justify-center p-4 shadow-xl shadow-blue-900/15 ring-4 ring-sky-100/90">
+              <img
+                src={IMAGES.logoBergen}
+                alt="Bergen Laundry Service"
+                className="h-full w-full object-contain"
+              />
             </div>
           </div>
           <div
@@ -191,16 +185,16 @@ export default function BergenLaundry() {
         </div>
       </section>
 
-      {/* Same pickup detail block as home “A — Bergen Laundry Service” */}
+      {/* Pickup pricing & policies */}
       <motion.section
-        className="border-y border-slate-200/80 bg-gradient-to-b from-slate-50/95 to-white py-14 md:py-16"
+        className="border-y border-slate-200/80 bg-gradient-to-b from-slate-50/95 to-white py-9 md:py-11"
         data-testid="bergen-home-mirror-pickup"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="container-pad grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <div className="container-pad grid lg:grid-cols-2 gap-7 lg:gap-9 items-start">
           <div>
             <p className="overline mb-2">BERGEN LAUNDRY SERVICE</p>
             <h2 className="h2">Pickup &amp; delivery</h2>
@@ -216,6 +210,10 @@ export default function BergenLaundry() {
               </li>
               <li>{PRICING.ccFeeNote}.</li>
               <li>{PRICING.pickupDeliveryFree}.</li>
+              <li>
+                Orders are processed at <strong>{BRAND.store}</strong>,{" "}
+                {LOCATIONS.newBridge.full}.
+              </li>
             </ul>
             <div className="mt-6 rounded-2xl border border-blue-200 bg-white p-5 flex gap-3 items-start">
               <span className="inline-flex shrink-0 mt-0.5 text-blue-700 will-change-transform" data-float-slow>
@@ -274,7 +272,7 @@ export default function BergenLaundry() {
         </div>
       </motion.section>
 
-      <section ref={heroImgSectionRef} className="container-pad pb-12">
+      <section ref={heroImgSectionRef} className="container-pad pb-8">
         <div className="rounded-3xl overflow-hidden border border-slate-200 max-w-4xl">
           <img
             ref={heroImgRef}
@@ -293,7 +291,7 @@ export default function BergenLaundry() {
             data-reveal-line
             aria-hidden
           />
-          <div className="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+          <div className="mt-6 surface-card overflow-hidden">
             <table className="w-full text-sm">
               <thead className="bg-slate-100 text-left">
                 <tr>
@@ -343,7 +341,7 @@ export default function BergenLaundry() {
         >
           Open special items (pop-up)
         </button>
-        <ul className="mt-6 grid sm:grid-cols-2 gap-2 text-sm text-slate-800">
+        <ul className="mt-6 grid sm:grid-cols-2 gap-2 text-sm text-slate-800" data-reveal-stagger>
           {SPECIAL_ITEMS_LIST.map((item) => (
             <li key={item} className="flex gap-2">
               <Check className="h-4 w-4 text-blue-700 shrink-0 mt-0.5" />
@@ -420,7 +418,7 @@ export default function BergenLaundry() {
         )}
       </section>
 
-      <section className="container-pad py-8 text-center text-sm text-slate-500 border-t border-slate-200/80">
+      <section className="container-pad py-6 text-center text-sm text-slate-500 border-t border-slate-200/80">
         <p className="mb-3">
           <span>*4% credit card fee per order / *min order: 15 lbs / </span>
           <button
@@ -449,7 +447,7 @@ export default function BergenLaundry() {
       </section>
 
       <section className="bg-blue-800 text-white" data-reveal-scale>
-        <div className="container-pad py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="container-pad py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="font-display text-xl text-white">Ready to book?</p>
           <a
             href={SCHEDULE_ORDER_URL}

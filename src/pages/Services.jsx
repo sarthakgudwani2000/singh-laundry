@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { BRAND, PRICING, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
+import { BRAND, PRICING, LOCATIONS, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
 import { fillServicesTemplate } from "@/lib/templateCopy";
 import {
   useGsapFloatAccents,
@@ -49,12 +49,12 @@ export default function Services() {
     <motion.div
       ref={pageRef}
       data-testid="services-page"
-      className="pb-16"
+      className="pb-10"
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
-      <section className="container-pad pt-14 md:pt-20 pb-12 text-center max-w-3xl mx-auto" data-reveal-blur>
+      <section className="page-hero-section" data-reveal-blur>
         <p className="overline mb-3">Services</p>
         <h1 className="h1">How we take care of your laundry</h1>
         <span
@@ -68,19 +68,27 @@ export default function Services() {
         </p>
       </section>
 
-      <section
+      <motion.section
         ref={pickupRef}
         id="pickup-delivery"
-        className="border-y border-slate-200/80 bg-gradient-to-b from-slate-50 to-white py-16 md:py-20"
+        className="section-panel"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="container-pad max-w-6xl mx-auto">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900 text-center">
-            {copy.pickup.title}
-          </h2>
-          <div
-            className="mt-10 rounded-3xl border border-slate-200/90 bg-white/90 backdrop-blur-sm overflow-hidden shadow-xl shadow-slate-900/8 ring-1 ring-white/60"
-            data-reveal-scale
-          >
+          <div className="text-center" data-reveal>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900">
+              {copy.pickup.title}
+            </h2>
+            <span
+              className="mt-3 mx-auto block h-1 w-24 rounded-full bg-gradient-to-r from-blue-600 to-sky-400"
+              data-reveal-line
+              aria-hidden
+            />
+          </div>
+          <motion.div className="mt-6 surface-card overflow-hidden" data-reveal-scale>
             <div className="grid lg:grid-cols-3 gap-0 items-stretch">
               <div className="relative min-h-[220px] lg:min-h-[320px] overflow-hidden">
                 <img
@@ -92,7 +100,7 @@ export default function Services() {
               </div>
               <div className="p-8 md:p-10 flex flex-col justify-center border-y lg:border-y-0 lg:border-x border-slate-200/80">
                 <p className="text-slate-700 leading-relaxed">{copy.pickup.intro}</p>
-                <ul className="mt-6 space-y-4 text-left text-sm text-slate-800">
+                <ul className="mt-6 space-y-4 text-left text-sm text-slate-800" data-reveal-stagger>
                   {copy.pickup.benefits.map((b) => (
                     <li key={b.title}>
                       <strong className="text-slate-900">{b.title}:</strong>{" "}
@@ -101,20 +109,28 @@ export default function Services() {
                   ))}
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a
+                  <motion.a
                     href={SCHEDULE_ORDER_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     Schedule a pickup <ArrowRight className="h-4 w-4" />
-                  </a>
-                  <Link to="/bergen-laundry-service" className="btn-secondary">
-                    Pricing &amp; policies
-                  </Link>
+                  </motion.a>
+                  <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                    <Link to="/bergen-laundry-service" className="btn-secondary">
+                      Pricing &amp; policies
+                    </Link>
+                  </motion.div>
                 </div>
                 <p className="mt-4 text-xs text-slate-500">
                   {PRICING.bergenWashFoldLb}/lb · {PRICING.minOrderLbs} lb minimum · {PRICING.pickupDeliveryFree}. {PRICING.ccFeeNote}.
+                </p>
+                <p className="mt-2 text-xs text-slate-500">
+                  Orders are processed at <strong className="text-slate-700">{BRAND.store}</strong>,{" "}
+                  {LOCATIONS.newBridge.full}.
                 </p>
               </div>
               <div className="relative min-h-[220px] lg:min-h-[320px] bg-slate-100 flex items-center justify-center p-8">
@@ -131,47 +147,73 @@ export default function Services() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <div className="container-pad pt-12 pb-4 max-w-3xl mx-auto text-center">
+      <div className="container-pad pt-8 pb-3 max-w-3xl mx-auto text-center" data-reveal-blur>
         <p className="overline mb-2">{BRAND.store}</p>
         <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
           On-site services (same location)
         </h2>
-        <p className="mt-3 text-slate-600 leading-relaxed">
+        <span
+          className="mt-3 mx-auto block h-1 w-20 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400"
+          data-reveal-line
+          aria-hidden
+        />
+        <p className="mt-3 content-prose">
           Self-serve, wash &amp; fold drop-off, and commercial accounts — all handled where{" "}
           <strong>{BRAND.pickup}</strong> processes pickups.
         </p>
       </div>
 
-      <section id="self-serve" className="container-pad pb-20 max-w-3xl mx-auto text-center">
-        <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
-          {copy.selfServe.title}
-        </h2>
-        <p className="mt-5 text-slate-600 leading-relaxed">{copy.selfServe.body}</p>
-        <div className="mt-8">
+      <motion.section
+        id="self-serve"
+        className="container-pad pb-12 max-w-3xl mx-auto text-center"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div data-reveal>
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+            {copy.selfServe.title}
+          </h2>
+          <span
+            className="mt-3 mx-auto block h-1 w-20 rounded-full bg-gradient-to-r from-blue-600 to-sky-400"
+            data-reveal-line
+            aria-hidden
+          />
+          <p className="mt-5 content-prose">{copy.selfServe.body}</p>
+        </div>
+        <motion.div className="mt-8" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
           <Link to="/new-bridge-laundromat" className="btn-primary inline-flex">
             Visit {BRAND.store} <ArrowRight className="h-4 w-4" />
           </Link>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section id="wash-fold" className="container-pad py-16 md:py-20 max-w-6xl mx-auto">
-        <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900 text-center">
-          {copy.washFold.title}
-        </h2>
-        <div className="mt-10 grid lg:grid-cols-3 gap-8 items-center">
-          <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-lg min-h-[240px]">
+      <section id="wash-fold" className="container-pad py-10 md:py-12 max-w-6xl mx-auto">
+        <div className="text-center" data-reveal>
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900">
+            {copy.washFold.title}
+          </h2>
+          <span
+            className="mt-3 mx-auto block h-1 w-24 rounded-full bg-gradient-to-r from-blue-600 to-indigo-500"
+            data-reveal-line
+            aria-hidden
+          />
+        </div>
+        <div className="mt-6 grid lg:grid-cols-3 gap-6 items-center">
+          <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-lg min-h-[240px] card-hover" data-reveal>
             <img
               src={IMAGES.servicesWashFold}
               alt="Ironing and finishing for wash-and-fold orders"
               className="w-full h-full min-h-[240px] object-cover"
             />
           </div>
-          <div className="text-center lg:text-left">
-            <p className="text-slate-700 leading-relaxed">{copy.washFold.intro}</p>
+          <div className="text-center lg:text-left" data-reveal>
+            <p className="content-prose">{copy.washFold.intro}</p>
             <p className="mt-4 text-sm font-semibold text-slate-900">Key benefits</p>
             <ul className="mt-3 space-y-3 text-sm text-slate-800 text-left">
               {copy.washFold.benefits.map((b) => (
@@ -180,14 +222,13 @@ export default function Services() {
                 </li>
               ))}
             </ul>
-            <Link
-              to="/new-bridge-laundromat"
-              className="btn-secondary mt-6 inline-flex"
-            >
-              Drop-off details <ArrowRight className="h-4 w-4" />
-            </Link>
+            <motion.div className="mt-6 inline-block" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              <Link to="/new-bridge-laundromat" className="btn-secondary inline-flex">
+                Drop-off details <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
           </div>
-          <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-lg min-h-[240px]">
+          <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-lg min-h-[240px] card-hover" data-reveal>
             <img
               src={IMAGES.servicesSelfServe}
               alt="Laundry basket at machines — self-serve and drop-off"
@@ -197,24 +238,40 @@ export default function Services() {
         </div>
       </section>
 
-      <section id="commercial" className="bg-slate-50 border-t border-slate-200/80 py-16 md:py-20">
+      <motion.section
+        id="commercial"
+        className="section-panel bg-slate-50"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
         <div className="container-pad max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900">
-            {copy.commercial.title}
-          </h2>
-          <div className="mt-8 rounded-3xl overflow-hidden border border-slate-200 shadow-lg max-w-2xl mx-auto">
+          <div data-reveal>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900">
+              {copy.commercial.title}
+            </h2>
+            <span
+              className="mt-3 mx-auto block h-1 w-24 rounded-full bg-gradient-to-r from-blue-600 to-slate-400"
+              data-reveal-line
+              aria-hidden
+            />
+          </div>
+          <div className="mt-8 rounded-3xl overflow-hidden border border-slate-200 shadow-lg max-w-2xl mx-auto card-hover" data-reveal-clip>
             <img
               src={IMAGES.servicesCommercial}
               alt="Industrial laundry equipment for commercial accounts"
               className="w-full h-52 md:h-64 object-cover"
             />
           </div>
-          <p className="mt-5 text-slate-600 leading-relaxed">{copy.commercial.body}</p>
-          <Link to="/contact" className="btn-primary mt-8 inline-flex">
-            Request a commercial quote <ArrowRight className="h-4 w-4" />
-          </Link>
+          <p className="mt-5 content-prose" data-reveal>{copy.commercial.body}</p>
+          <motion.div className="mt-8" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+            <Link to="/contact" className="btn-primary inline-flex">
+              Request a commercial quote <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </motion.div>
   );
 }

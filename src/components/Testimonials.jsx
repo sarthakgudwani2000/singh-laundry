@@ -25,7 +25,7 @@ export default function Testimonials() {
   return (
     <section className="section container-pad" data-testid="home-testimonials">
       <p className="overline mb-3">Loved locally</p>
-      <div className="flex flex-col lg:flex-row justify-between gap-6 lg:items-end mb-12">
+      <div className="flex flex-col lg:flex-row justify-between gap-6 lg:items-end mb-8">
         <h2 className="h2 max-w-2xl">
           Hear what our customers love about us.
         </h2>

@@ -25,7 +25,7 @@ function RedirectToExternalBooking() {
     window.location.replace(SCHEDULE_ORDER_URL);
   }, []);
   return (
-    <div className="container-pad py-24 text-center text-slate-600 text-sm">
+    <div className="container-pad py-14 text-center text-slate-600 text-sm">
       Opening our booking partner…
     </div>
   );

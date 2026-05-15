@@ -66,9 +66,21 @@ export default function NewBridge() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
-      <section className="container-pad pt-14 md:pt-20 pb-8 text-center max-w-3xl mx-auto" data-reveal-blur>
+      <section className="page-hero-section pb-5" data-reveal-blur>
+        <div className="logo-surface mx-auto mb-4 inline-flex rounded-2xl px-6 py-3">
+          <img
+            src={IMAGES.logoNewBridge}
+            alt={BRAND.store}
+            className="h-12 md:h-14 w-auto max-w-[min(100%,18rem)] object-contain"
+          />
+        </div>
         <p className="overline mb-2">{BRAND.store}</p>
         <h1 className="h1">New Bridge Laundromat</h1>
+        <span
+          className="mt-4 mx-auto block h-1.5 w-28 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-500"
+          data-reveal-line
+          aria-hidden
+        />
         <p className="mt-4 text-slate-600 flex flex-wrap items-center justify-center gap-2 text-sm md:text-base">
           <MapPin className="h-4 w-4 text-blue-800 shrink-0" />
           <span>{LOCATIONS.newBridge.full}</span>
@@ -85,8 +97,8 @@ export default function NewBridge() {
         </p>
       </section>
 
-      <section ref={heroImgSectionRef} className="container-pad pb-12 max-w-4xl mx-auto">
-        <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl group">
+      <section ref={heroImgSectionRef} className="container-pad pb-8 max-w-4xl mx-auto" data-reveal-clip>
+        <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl group card-hover">
           <img
             ref={heroImgRef}
             src={carouselSlides[slide].src}
@@ -127,23 +139,25 @@ export default function NewBridge() {
         </div>
       </section>
 
-      <section className="container-pad pb-12 max-w-4xl mx-auto text-center">
-        <p className="text-slate-700 text-base md:text-lg">
+      <section className="container-pad pb-3 max-w-4xl mx-auto text-center" data-reveal>
+        <p className="content-prose">
           We are committed to providing a comfortable, efficient laundry experience for you.{" "}
           <strong>Our first-class amenities include:</strong>
         </p>
       </section>
 
-      <section className="container-pad pb-16 max-w-5xl mx-auto">
+      <section className="container-pad pb-4 max-w-5xl mx-auto">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-reveal-stagger>
           {NEW_BRIDGE_AMENITIES.map((a, i) => {
             const Icon = amenityIcons[i] || Wifi;
             return (
               <div
                 key={a.title}
-                className="rounded-2xl border border-blue-200/80 bg-white p-6 shadow-md shadow-slate-900/5 text-left"
+                className="surface-card p-6 text-left"
               >
-                <Icon className="h-6 w-6 text-blue-800" />
+                <span className="inline-block text-blue-800" data-float-slow>
+                  <Icon className="h-6 w-6" />
+                </span>
                 <h3 className="mt-4 font-display font-semibold text-slate-900">{a.title}</h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">{a.body}</p>
               </div>
@@ -152,19 +166,16 @@ export default function NewBridge() {
         </div>
       </section>
 
-      <section className="container-pad pb-12">
-        <div
-          className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto"
-          data-reveal-stagger="slide-x"
-        >
-          <div className="rounded-2xl border border-slate-200 p-5">
+      <section className="container-pad pb-6 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-3 gap-4" data-reveal-stagger>
+          <div className="surface-card p-5" data-reveal>
             <span className="inline-block text-blue-800 will-change-transform" data-float>
               <MapPin className="h-5 w-5" />
             </span>
             <p className="mt-2 text-xs font-semibold uppercase text-slate-500">Address</p>
             <p className="mt-1 font-medium text-slate-900">{LOCATIONS.newBridge.full}</p>
           </div>
-          <div className="rounded-2xl border border-slate-200 p-5">
+          <div className="surface-card p-5" data-reveal>
             <span className="inline-block text-blue-800 will-change-transform" data-float-slow>
               <Phone className="h-5 w-5" />
             </span>
@@ -173,7 +184,7 @@ export default function NewBridge() {
               {BRAND.phoneStore}
             </a>
           </div>
-          <div className="rounded-2xl border border-slate-200 p-5">
+          <div className="surface-card p-5" data-reveal>
             <span className="inline-block text-blue-800 will-change-transform" data-float>
               <Clock className="h-5 w-5" />
             </span>
@@ -185,7 +196,10 @@ export default function NewBridge() {
         </div>
       </section>
 
-      <section className="section bg-gradient-to-b from-slate-50 to-white border-y border-slate-200/70" data-reveal>
+      <section
+        className="border-y border-slate-200/70 bg-gradient-to-b from-slate-50 to-white pt-6 pb-10 md:pt-8 md:pb-12"
+        data-reveal
+      >
         <div className="container-pad max-w-5xl mx-auto">
           <h2 className="h2 text-center">Wash, Dry &amp; Fold Service</h2>
           <span
@@ -193,7 +207,7 @@ export default function NewBridge() {
             data-reveal-line
             aria-hidden
           />
-          <div className="mt-10 grid lg:grid-cols-3 gap-8 items-center">
+          <div className="mt-6 grid lg:grid-cols-3 gap-6 items-center">
             <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-lg order-2 lg:order-1">
               <img
                 src={IMAGES.newBridgeWashFoldLeft}
@@ -275,15 +289,17 @@ export default function NewBridge() {
         </div>
       </section>
 
-      <section className="container-pad py-12 text-center" data-reveal-scale>
-        <a
+      <section className="container-pad py-8 text-center" data-reveal-scale>
+        <motion.a
           href={SCHEDULE_ORDER_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-primary inline-flex"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.98 }}
         >
           Schedule Bergen pickup <ArrowRight className="h-4 w-4" />
-        </a>
+        </motion.a>
       </section>
     </motion.div>
   );

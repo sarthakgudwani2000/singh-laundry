@@ -121,10 +121,10 @@ h6,
     @apply text-xs font-bold uppercase tracking-[0.22em] text-blue-800;
   }
   .container-pad {
-    @apply px-6 md:px-12 lg:px-24 max-w-[1400px] mx-auto w-full;
+    @apply px-5 md:px-8 lg:px-16 max-w-[1400px] mx-auto w-full;
   }
   .section {
-    @apply py-16 md:py-24 lg:py-28;
+    @apply py-10 md:py-14 lg:py-16;
   }
   .h1 {
     @apply text-4xl sm:text-5xl lg:text-[3.35rem] xl:text-6xl font-bold tracking-tight text-blue-900;
@@ -143,11 +143,26 @@ h6,
   .glass-panel {
     @apply rounded-3xl border border-white/60 bg-white/75 shadow-xl shadow-slate-900/5 backdrop-blur-xl;
   }
+  .logo-surface {
+    @apply border border-sky-200/80 bg-gradient-to-br from-sky-50 via-blue-50 to-white shadow-md shadow-blue-600/10 ring-1 ring-white/80;
+  }
   .glass-header {
     @apply border-b border-white/50 bg-white/70 backdrop-blur-2xl shadow-sm shadow-slate-900/5;
   }
   .card-hover {
     @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/10;
+  }
+  .page-hero-section {
+    @apply container-pad pt-8 md:pt-11 pb-8 max-w-3xl mx-auto text-center;
+  }
+  .surface-card {
+    @apply rounded-3xl border border-slate-200/90 bg-white/90 backdrop-blur-sm shadow-xl shadow-slate-900/10 ring-1 ring-white/60 card-hover;
+  }
+  .section-panel {
+    @apply border-y border-slate-200/80 bg-gradient-to-b from-slate-50/95 to-white py-10 md:py-12;
+  }
+  .content-prose {
+    @apply text-slate-700 leading-relaxed text-base md:text-lg;
   }
 }
 

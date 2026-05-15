@@ -7,8 +7,8 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
-import { Menu, X, Shirt, Truck, Phone, Mail, ArrowRight } from "lucide-react";
-import { BRAND, SCHEDULE_ORDER_URL } from "@/lib/brand";
+import { Menu, X, Phone, Mail, ArrowRight } from "lucide-react";
+import { BRAND, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
 
 const links = [
   { to: "/", label: "Home", short: "Home" },
@@ -185,11 +185,19 @@ export default function Navbar() {
                   : `${BRAND.parent} home`
               }
             >
-              <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-b from-blue-300 via-blue-500 to-blue-800 text-white shadow-md shadow-blue-600/30 ring-1 ring-white/25 transition-transform duration-300 group-hover:scale-[1.03] group-hover:shadow-lg">
+              <div className="logo-surface relative flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-[1.03] group-hover:shadow-lg overflow-hidden p-1.5">
                 {isBergenPickupPage ? (
-                  <Truck className="h-[1.35rem] w-[1.35rem]" strokeWidth={2} aria-hidden />
+                  <img
+                    src={IMAGES.logoBergen}
+                    alt=""
+                    className="h-full w-full object-contain"
+                  />
                 ) : (
-                  <Shirt className="h-[1.35rem] w-[1.35rem]" strokeWidth={2} aria-hidden />
+                  <img
+                    src={IMAGES.logoSingh}
+                    alt=""
+                    className="h-full w-full object-contain"
+                  />
                 )}
               </div>
               <div className="min-w-0 leading-tight">

@@ -168,7 +168,7 @@ export default function SchedulePickup() {
         <form
           id="pickup-form"
           onSubmit={submit}
-          className="mt-12 rounded-[2rem] border border-slate-200/90 p-7 md:p-10 space-y-6 bg-white/85 backdrop-blur-sm shadow-xl shadow-slate-900/8 ring-1 ring-white/70"
+          className="mt-8 surface-card p-6 md:p-8 space-y-5"
           data-testid="schedule-form"
           data-reveal-scale
         >
@@ -325,15 +325,17 @@ export default function SchedulePickup() {
             <span className="font-mono font-bold">{PRICING.firstOrderCode}</span>.
           </div>
 
-          <button
+          <motion.button
             type="submit"
             disabled={loading}
             className="btn-primary w-full disabled:opacity-60"
             data-testid="sch-submit"
+            whileHover={{ y: loading ? 0 : -2 }}
+            whileTap={{ scale: loading ? 1 : 0.98 }}
           >
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
             {loading ? "Scheduling..." : "Confirm my pickup"}
-          </button>
+          </motion.button>
         </form>
       </div>
     </motion.section>

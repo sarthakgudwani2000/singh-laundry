@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaYelp } from "react-icons/fa6";
 import { SiGooglemaps } from "react-icons/si";
@@ -63,7 +63,7 @@ export default function Footer() {
         className="pointer-events-none absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_20%_0%,_rgb(37_99_235_/_0.25),_transparent_50%)]"
         aria-hidden
       />
-      <div className="container-pad relative py-14 grid md:grid-cols-4 gap-10">
+      <div className="container-pad relative py-9 grid md:grid-cols-4 gap-7">
         <div>
           <h3 className="font-display text-white text-xl font-bold">
             {BRAND.parent}
@@ -178,7 +178,7 @@ export default function Footer() {
       <div className="border-t border-slate-800">
         <div className="container-pad py-5 flex flex-col gap-3 text-xs text-slate-500">
           <p className="text-center md:text-left">
-            © {new Date().getFullYear()} {BRAND.parent}. All rights reserved.
+            Â© {new Date().getFullYear()} {BRAND.parent}. All rights reserved.
           </p>
           <p className="text-center md:text-left">
             <Link to="/" className="hover:text-slate-300">

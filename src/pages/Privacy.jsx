@@ -17,7 +17,7 @@ export default function Privacy() {
     <motion.div
       ref={pageRef}
       data-testid="privacy-page"
-      className="container-pad py-14 md:py-20 max-w-3xl"
+      className="container-pad py-9 md:py-12 max-w-3xl"
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -40,7 +40,7 @@ export default function Privacy() {
         </p>
       </div>
 
-      <div className="mt-10 space-y-8 text-slate-700 text-sm leading-relaxed">
+      <div className="mt-6 space-y-6 text-slate-700 text-sm leading-relaxed">
         <section data-reveal>
           <h2 className="font-display text-lg font-semibold text-slate-900">
             Who we are
@@ -115,7 +115,7 @@ export default function Privacy() {
         </section>
       </div>
 
-      <p className="mt-12" data-reveal>
+      <p className="mt-8" data-reveal>
         <Link to="/" className="text-blue-800 font-medium">
           ← Back to home
         </Link>

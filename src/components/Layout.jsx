@@ -7,7 +7,6 @@ import {
   useScroll,
   useSpring,
 } from "framer-motion";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
@@ -54,7 +53,6 @@ export default function Layout({ children }) {
       />
 
       <div className="sticky top-0 z-[52]">
-        <AnnouncementBar />
         <Navbar />
       </div>
       <AnimatePresence mode="wait">

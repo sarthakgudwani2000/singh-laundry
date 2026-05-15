@@ -48,7 +48,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-3xl bg-white border border-slate-200 p-7 md:p-8 space-y-5"
+      className="surface-card p-6 md:p-7 space-y-4"
       data-testid="contact-form"
     >
       <div>

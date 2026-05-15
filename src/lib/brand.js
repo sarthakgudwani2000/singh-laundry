@@ -92,53 +92,78 @@ export const SOCIAL = {
  * (Vite copies `public/` into `dist/`). Uses `import.meta.env.BASE_URL` when set (e.g. `VITE_BASE`);
  * with the default `./` base, paths are also corrected from the bundle URL so `/new` (no trailing slash) still loads `/new/images/...`.
  */
+function encodeSiteFileName(file) {
+  return file.replace(/&/g, "%26").replace(/#/g, "%23").replace(/ /g, "%20");
+}
+
 function publicAsset(pathFromPublicDir) {
   const rel = pathFromPublicDir.replace(/^\//, "");
   const base = import.meta.env.BASE_URL;
   if (base && base !== "/" && base !== "./") {
-    return `${base}${rel}`;
+    const normalized = base.endsWith("/") ? base : `${base}/`;
+    return `${normalized}${rel}`;
   }
   const prefix = pathnamePrefixBeforeAssetsChunk();
   if (prefix) return `${prefix}/${rel}`;
-  return `${base}${rel}`;
+  return `/${rel}`;
 }
 
-const V = publicAsset("images/site/bergen-delivery-van.png");
-const W = publicAsset("images/site/wash-fold-staff.png");
-const L = publicAsset("images/site/laundromat-dryers.png");
-const B = publicAsset("images/site/laundry-operation-bags.png");
+const img = (file) => publicAsset(`images/site/${encodeSiteFileName(file)}`);
+
+const homePagePromo = img("Home Page.png");
+const washFoldHome = img("wash-dry-fold-home-page.jpg");
+const renovatedHome = img("Fully Renovated  November 2025 (Home Page).jpg");
+const newBridgeHome = img("New Bridge Laundromat (Home Page).jpg");
+const pickupServices = img("pickup-delivery-service-services-page.png");
+const washFoldServices1 = img("wash-dry-fold-service-1-services-page.png");
+const washFoldServices2 = img("wash-dry-fold-service-2-services-page.png");
+const logoSingh = img("sl-shirt-logo-1aa-w314-o.png");
+const logoBergen = img("Bergen-Laundry-Logo.png");
+const logoNewBridge = img("New Bridge Laundromat logo.png");
+const newBridgePhoto1 = img("New Bridge Laundromat1.jpg");
+const newBridgePhoto2 = img("New Bridge Laundromat2.jpg");
+const newBridgePhoto3 = img("New Bridge Laundromat3.jpg");
+const newBridgePhoto4 = img("New Bridge Laundromat4.jpg");
+const aboutPhoto = img("home-page-image-1c-w1685-o.jpg");
+const commercialDryers = img("laundromat-dryers.png");
+const operationBags = img("laundry-operation-bags.png");
+const washFoldStaff = img("wash-fold-staff.png");
 
 export const IMAGES = {
-  clientBergenVan: V,
-  clientWashFold: W,
-  clientLaundromat: L,
-  clientBags: B,
+  clientBergenVan: homePagePromo,
+  clientWashFold: washFoldHome,
+  clientLaundromat: newBridgeHome,
+  clientBags: operationBags,
 
-  homePromoVan: V,
-  homeCardLaundromat: L,
-  homeCardRenovated: W,
-  homeCardWashFold: W,
-  homeBergenAside: W,
-  homeNewBridgeAside: L,
+  logoSingh,
+  logoBergen,
+  logoNewBridge,
 
-  bergenPromoVan: V,
-  bergenPickupAside: W,
-  bergenParallax: B,
+  homePromoVan: homePagePromo,
+  homeCardLaundromat: newBridgeHome,
+  homeCardRenovated: renovatedHome,
+  homeCardWashFold: washFoldHome,
+  homeBergenAside: washFoldStaff,
+  homeNewBridgeAside: newBridgeHome,
 
-  servicesPickup: V,
-  servicesWashFold: W,
-  servicesSelfServe: L,
-  servicesCommercial: B,
+  bergenPromoVan: homePagePromo,
+  bergenPickupAside: washFoldStaff,
+  bergenParallax: operationBags,
 
-  newBridgeCarousel1: L,
-  newBridgeCarousel2: W,
-  newBridgeCarousel3: V,
-  newBridgeWashFoldLeft: W,
-  newBridgeWashFoldRight: L,
+  servicesPickup: pickupServices,
+  servicesWashFold: washFoldServices1,
+  servicesSelfServe: washFoldServices2,
+  servicesCommercial: commercialDryers,
 
-  aboutBanner: L,
-  contactSideA: V,
-  contactSideB: L,
+  newBridgeCarousel1: newBridgePhoto1,
+  newBridgeCarousel2: newBridgePhoto2,
+  newBridgeCarousel3: newBridgePhoto3,
+  newBridgeWashFoldLeft: washFoldHome,
+  newBridgeWashFoldRight: newBridgePhoto4,
+
+  aboutBanner: aboutPhoto,
+  contactSideA: homePagePromo,
+  contactSideB: newBridgeHome,
 };
 
 export const PICKUP_WINDOWS = [

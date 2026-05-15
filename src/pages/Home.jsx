@@ -13,7 +13,14 @@ import {
   useGsapFloatAccents,
   useGsapScrollReveal,
 } from "@/hooks/useGsapPageAnimations";
-import { ArrowRight, Phone, MapPin, Truck, Gift } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  MapPin,
+  Phone,
+  RefreshCw,
+  Truck,
+} from "lucide-react";
 import SpecialItemsDialog from "@/components/SpecialItemsDialog";
 import {
   BRAND,
@@ -32,10 +39,6 @@ export default function Home() {
   const heroRef = useRef(null);
   const heroOrb1Ref = useRef(null);
   const heroOrb2Ref = useRef(null);
-  const bergenRef = useRef(null);
-  const bergenImgRef = useRef(null);
-  const newBridgeRef = useRef(null);
-  const nbImgRef = useRef(null);
 
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.35);
@@ -54,10 +57,6 @@ export default function Home() {
     const hero = heroRef.current;
     const o1 = heroOrb1Ref.current;
     const o2 = heroOrb2Ref.current;
-    const bSec = bergenRef.current;
-    const bImg = bergenImgRef.current;
-    const nbSec = newBridgeRef.current;
-    const nbImg = nbImgRef.current;
     if (!root || !hero || !o1 || !o2) return;
 
     const ctx = gsap.context(() => {
@@ -81,38 +80,6 @@ export default function Home() {
           scrub: 0.65,
         },
       });
-      if (bImg && bSec) {
-        gsap.fromTo(
-          bImg,
-          { y: 36 },
-          {
-            y: -36,
-            ease: "none",
-            scrollTrigger: {
-              trigger: bSec,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 0.85,
-            },
-          },
-        );
-      }
-      if (nbImg && nbSec) {
-        gsap.fromTo(
-          nbImg,
-          { y: 28 },
-          {
-            y: -28,
-            ease: "none",
-            scrollTrigger: {
-              trigger: nbSec,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 0.85,
-            },
-          },
-        );
-      }
     }, root);
 
     return () => ctx.revert();
@@ -131,16 +98,34 @@ export default function Home() {
     my.set(0.35);
   };
 
+  const heroHighlights = [
+    {
+      icon: Truck,
+      title: `${PRICING.bergenWashFoldLb}/lb wash & fold`,
+      detail: `${PRICING.minOrderLbs} lb minimum · ${PRICING.pickupDeliveryFree}`,
+    },
+    {
+      icon: Clock,
+      title: "Next-day returns",
+      detail: PRICING.nextDayNote,
+    },
+    {
+      icon: RefreshCw,
+      title: "Recurring & volume",
+      detail: "Automatic orders · volume discounts",
+    },
+  ];
+
   return (
     <div ref={homeRootRef} data-testid="home-page">
       <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} />
       {/* Hero + parent clarity */}
       <section
         ref={heroRef}
-        className="container-pad pt-10 md:pt-14 pb-12 md:pb-16"
+        className="container-pad pt-8 md:pt-10 pb-8 md:pb-10"
       >
         <motion.div
-          className="relative overflow-hidden rounded-[2rem] glass-panel p-8 md:p-12 lg:p-14 border border-white/80"
+          className="relative overflow-hidden rounded-[2rem] glass-panel p-6 md:p-8 lg:p-10 border border-white/80"
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
@@ -164,126 +149,146 @@ export default function Home() {
           className="pointer-events-none absolute -left-20 bottom-0 h-48 w-48 rounded-full bg-blue-200/25 blur-3xl z-0 will-change-transform"
           aria-hidden
         />
-        <div className="relative z-[2]">
-        <p className="overline mb-3">Singh Laundry</p>
-        <p className="text-slate-600 font-medium">Trust Us With Your Threads</p>
-        <motion.h2
-          className="h2 max-w-3xl mt-3"
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        <motion.div
+          className="relative z-[2] grid lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 items-center"
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          New Jersey&apos;s Finest Laundromats
-        </motion.h2>
-        <motion.p
-          className="mt-3 font-display text-lg text-slate-700"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.4, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-        >
-          &quot;Clean Clothes, Happy Life&quot;
-        </motion.p>
-        <motion.h1
-          className="h1 max-w-3xl mt-5"
-          initial={
-            reduceMotion
-              ? { opacity: 1 }
-              : { opacity: 0, y: 24, filter: "blur(10px)" }
-          }
-          whileInView={
-            reduceMotion
-              ? { opacity: 1 }
-              : { opacity: 1, y: 0, filter: "blur(0px)" }
-          }
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Welcome To North Jersey&apos;s Best FREE Laundry Pickup &amp;
-          Delivery Service
-        </motion.h1>
-        <p className="mt-5 text-slate-600 text-lg max-w-2xl leading-relaxed">
-          $2.15 per pound* / No Charge For Pickup &amp; Delivery / Next Day
-          Returns Mon-Fri
-        </p>
-        <p className="mt-3 text-slate-600 text-lg max-w-2xl leading-relaxed">
-          Automatic Recurring Orders Can Be Set / Volume Based Discounts
-          Available
-        </p>
-        <p className="mt-5 text-slate-600 text-base max-w-2xl leading-relaxed">
-          <strong>{BRAND.parent}</strong> is the parent company of{" "}
-          <strong>{BRAND.pickup}</strong> &amp; <strong>{BRAND.store}</strong>.
-        </p>
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
-          <motion.div
-            className="inline-flex"
-            whileHover={reduceMotion ? {} : { scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            animate={
-              reduceMotion
-                ? {}
-                : {
-                    boxShadow: [
-                      "0 0 0 0 rgba(37, 99, 235, 0)",
-                      "0 0 0 10px rgba(37, 99, 235, 0.12)",
-                      "0 0 0 0 rgba(37, 99, 235, 0)",
-                    ],
-                  }
-            }
-            transition={
-              reduceMotion
-                ? {}
-                : { boxShadow: { duration: 2.8, repeat: Infinity, ease: "easeInOut" } }
-            }
-          >
-            <a
-              href={SCHEDULE_ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-              data-testid="hero-cta-schedule"
-            >
-              Schedule a pickup <ArrowRight className="h-4 w-4" />
-            </a>
-          </motion.div>
-          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-          <Link to="/new-bridge-laundromat" className="btn-secondary">
-            New Bridge Laundromat
-          </Link>
-          </motion.div>
-        </div>
-        <div className="mt-6">
-          <p className="text-sm font-semibold text-slate-500">SCHEDULE A PICKUP</p>
-          <p className="mt-2 text-sm text-slate-500">
-            <a href={`tel:${BRAND.phoneBergen}`} className="hover:text-slate-700">
-              {BRAND.phoneBergen}
-            </a>
-          </p>
-          <p className="mt-1 text-sm text-slate-500">
-            <a href={`mailto:${BRAND.email}`} className="hover:text-slate-700">
-              {BRAND.email}
-            </a>
-          </p>
-        </div>
-        </div>
+          <div className="min-w-0">
+            <motion.div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <p className="overline mb-0">Singh Laundry</p>
+              <span className="hidden sm:inline text-slate-300" aria-hidden>
+                ·
+              </span>
+              <p className="text-sm font-medium text-slate-600">
+                Trust Us With Your Threads
+              </p>
+            </motion.div>
+
+            <h1 className="h1 mt-4 max-w-xl lg:max-w-none">
+              North Jersey&apos;s best free laundry pickup &amp; delivery
+            </h1>
+
+            <p className="mt-4 text-base md:text-lg text-slate-600 max-w-xl leading-relaxed">
+              <span className="font-display font-semibold text-slate-800">
+                New Jersey&apos;s finest laundromats
+              </span>
+              {" "}
+              — &quot;Clean Clothes, Happy Life.&quot;{" "}
+              <strong>{BRAND.pickup}</strong> &amp; <strong>{BRAND.store}</strong>{" "}
+              under <strong>{BRAND.parent}</strong>.
+            </p>
+
+            <ul className="mt-6 grid sm:grid-cols-2 gap-3" aria-label="Service highlights">
+              {heroHighlights.map(({ icon: Icon, title, detail }) => (
+                <li
+                  key={title}
+                  className="flex gap-3 rounded-2xl border border-slate-200/90 bg-white/80 px-4 py-3 shadow-sm"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+                    <Icon className="h-4 w-4" aria-hidden />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold text-slate-900 leading-snug">
+                      {title}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-slate-600 leading-relaxed">
+                      {detail}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-4 text-sm text-slate-600 max-w-xl">
+              Pickup orders are washed, dried, and folded at our Bergenfield
+              location.{" "}
+              <Link
+                to="/services#pickup-delivery"
+                className="font-medium text-blue-800 hover:underline"
+              >
+                Service details
+              </Link>
+            </p>
+
+            <motion.div className="mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
+              <motion.a
+                href={SCHEDULE_ORDER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary justify-center"
+                data-testid="hero-cta-schedule"
+                whileHover={reduceMotion ? {} : { scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Schedule a pickup <ArrowRight className="h-4 w-4" />
+              </motion.a>
+              <Link
+                to="/new-bridge-laundromat"
+                className="btn-secondary justify-center"
+              >
+                New Bridge Laundromat
+              </Link>
+              <Link
+                to="/bergen-laundry-service"
+                className="btn-secondary justify-center"
+              >
+                {BRAND.pickup}
+              </Link>
+            </motion.div>
+
+            <p className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
+              <a
+                href={`tel:${BRAND.phoneBergen}`}
+                className="inline-flex items-center gap-1.5 font-medium hover:text-slate-800"
+              >
+                <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                {BRAND.phoneBergen}
+              </a>
+              <a
+                href={`mailto:${BRAND.email}`}
+                className="hover:text-slate-800 break-all"
+              >
+                {BRAND.email}
+              </a>
+            </p>
+          </div>
+
+          <div className="relative min-h-[220px] sm:min-h-[260px] lg:min-h-[340px] rounded-2xl overflow-hidden border border-slate-200/90 shadow-lg shadow-slate-900/10 ring-1 ring-white/70">
+            <img
+              src={IMAGES.homePromoVan}
+              alt="Bergen Laundry Service delivery van — free pickup and delivery"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-slate-900/10 to-transparent pointer-events-none"
+              aria-hidden
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+              <p className="inline-flex w-fit items-center rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-md ring-2 ring-white/30">
+                Free pickup &amp; delivery
+              </p>
+              <p className="text-sm font-medium text-white/95 max-w-[14rem] leading-snug drop-shadow-sm">
+                {PRICING.firstOrderHeadline}{" "}
+                <span className="font-mono font-bold">{PRICING.firstOrderCode}</span>
+              </p>
+            </div>
+          </div>
+        </motion.div>
         </motion.div>
       </section>
 
       {/* Legacy template: seal + van + FIRST10 promo */}
-      <section className="container-pad py-10 md:py-14">
+      <section className="container-pad py-8 md:py-10">
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-6 items-center">
           <div className="flex justify-center lg:justify-start" data-reveal>
-            <div className="w-44 h-44 rounded-full border-4 border-slate-900 bg-white flex flex-col items-center justify-center text-center p-4 shadow-xl ring-4 ring-slate-200/80">
-              <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500">
-                Est. 2017
-              </p>
-              <p className="mt-1 font-display text-lg font-bold text-slate-900 leading-tight">
-                Bergen Laundry
-              </p>
-              <p className="mt-1 text-[10px] font-semibold text-slate-600 leading-snug">
-                Your pick up &amp; delivery
-              </p>
+            <div className="w-44 h-44 rounded-full border-4 border-blue-800 bg-gradient-to-br from-sky-50 via-blue-50 to-white flex flex-col items-center justify-center p-4 shadow-xl shadow-blue-900/15 ring-4 ring-sky-100/90">
+              <img
+                src={IMAGES.logoBergen}
+                alt="Bergen Laundry Service"
+                className="h-full w-full object-contain"
+              />
             </div>
           </div>
           <div
@@ -328,21 +333,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-pad pb-14 md:pb-20">
-        <p className="text-center text-slate-600 max-w-3xl mx-auto mb-10 text-sm md:text-base">
+      <section className="container-pad pb-9 md:pb-12">
+        <p className="text-center text-slate-600 max-w-3xl mx-auto mb-6 text-sm md:text-base">
           Wash &amp; Fold Drop Off Laundry Service is available 7 days a week at{" "}
           {BRAND.store}.
         </p>
-        <div className="grid md:grid-cols-3 gap-6" data-reveal-stagger>
-          <div className="rounded-3xl border border-slate-200/90 bg-white shadow-lg shadow-slate-900/5 overflow-hidden flex flex-col">
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="surface-card overflow-hidden flex flex-col" data-reveal>
             <img
-              src={IMAGES.homeCardLaundromat}
-              alt="Commercial washers and dryers in a modern laundromat"
+              src={IMAGES.homeNewBridgeAside}
+              alt="Laundry detergents and machines — drop-off wash and fold at New Bridge"
               className="h-44 w-full object-cover"
             />
             <div className="p-6 flex-1 flex flex-col">
               <p className="font-display font-bold text-lg text-slate-900">
                 {BRAND.store}
+              </p>
+              <p className="mt-2 text-sm text-slate-600">
+                Where {BRAND.pickup} orders are processed.
               </p>
               <p className="mt-3 text-sm text-slate-600 flex gap-2">
                 <MapPin className="h-4 w-4 shrink-0 text-blue-700 mt-0.5" />
@@ -363,9 +371,15 @@ export default function Home() {
                 <br />
                 <span className="text-slate-500">{HOURS.lastWash}</span>
               </p>
+              <Link
+                to="/new-bridge-laundromat"
+                className="mt-4 text-sm font-semibold text-blue-800 inline-flex items-center gap-1 hover:underline"
+              >
+                Store details <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
           </div>
-          <div className="rounded-3xl border border-slate-200/90 bg-white shadow-lg shadow-slate-900/5 overflow-hidden flex flex-col">
+          <div className="surface-card overflow-hidden flex flex-col" data-reveal>
             <img
               src={IMAGES.homeCardRenovated}
               alt="Staff finishing laundry — renovated wash-and-fold service"
@@ -385,7 +399,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="rounded-3xl border border-slate-200/90 bg-white shadow-lg shadow-slate-900/5 overflow-hidden flex flex-col">
+          <div className="surface-card overflow-hidden flex flex-col" data-reveal>
             <img
               src={IMAGES.homeCardWashFold}
               alt="Staff folding laundry — professional wash, dry, and fold"
@@ -399,6 +413,13 @@ export default function Home() {
                 Tired of laundry day? Let us handle it! We use high-quality
                 detergents to get your clothes their cleanest.
               </p>
+              <p className="mt-3 text-sm text-slate-700 flex gap-2 items-start">
+                <Truck className="h-4 w-4 shrink-0 text-blue-700 mt-0.5" />
+                <span>
+                  Drop-off wash, dry &amp; fold:{" "}
+                  <strong>{PRICING.newBridgeWashFoldLb}/lb</strong>
+                </span>
+              </p>
               <p className="mt-3 text-sm font-semibold text-slate-800">
                 Next Day Pickup (on most orders)
               </p>
@@ -407,214 +428,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* A — Bergen Laundry Service (scannable) */}
-      <motion.section
-        ref={bergenRef}
-        className="border-y border-slate-200/80 bg-gradient-to-b from-slate-50/95 to-white py-14 md:py-20"
-        data-testid="home-bergen-block"
-        initial={{ opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="container-pad grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-          <div>
-            <p className="overline mb-2">BERGEN LAUNDRY SERVICE</p>
-            <h2 className="h2">Pickup &amp; delivery</h2>
-            <span
-              className="mt-3 block h-1 w-24 rounded-full bg-gradient-to-r from-blue-600 to-sky-400"
-              data-reveal-line
-              aria-hidden
-            />
-            <ul className="mt-6 space-y-3 text-slate-700">
-              <li>
-                <strong>Wash &amp; fold:</strong> {PRICING.bergenWashFoldLb}{" "}
-                / lb · <strong>{PRICING.minOrderLbs} lb minimum</strong>
-              </li>
-              <li>{PRICING.ccFeeNote}.</li>
-              <li>{PRICING.pickupDeliveryFree}.</li>
-            </ul>
-            <div className="mt-6 rounded-2xl border border-blue-200 bg-white p-5 flex gap-3 items-start">
-              <span className="inline-flex shrink-0 mt-0.5 text-blue-700 will-change-transform" data-float-slow>
-                <Gift className="h-6 w-6" />
-              </span>
-              <div>
-                <p className="font-semibold text-slate-900">
-                  First-order savings
-                </p>
-                <p className="text-sm text-slate-600 mt-1">
-                  <strong>{PRICING.firstOrderAmount} off</strong> first order
-                  with code{" "}
-                  <span className="font-mono font-semibold text-slate-900">
-                    {PRICING.firstOrderCode}
-                  </span>{" "}
-                  — always visible here (no pop-up), matching our classic site
-                  offer.
-                </p>
-              </div>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href={SCHEDULE_ORDER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                Schedule a pickup
-              </a>
-              <Link to="/bergen-laundry-service" className="btn-secondary">
-                Full Bergen Laundry page
-              </Link>
-            </div>
-            <p className="mt-5 text-sm text-slate-600">
-              <button
-                type="button"
-                onClick={() => setSpecialOpen(true)}
-                className="text-blue-800 font-medium underline underline-offset-2"
-              >
-                Special items (pop-up)
-              </button>
-              {" · "}
-              <Link
-                to="/bergen-laundry-service#terms"
-                className="text-blue-800 font-medium underline underline-offset-2"
-              >
-                Terms of service
-              </Link>
-            </p>
-          </div>
-          <motion.div
-            className="rounded-3xl overflow-hidden border border-slate-200/90 shadow-xl shadow-slate-900/10 ring-1 ring-white/60 card-hover"
-            whileHover={{ scale: 1.02, rotateZ: reduceMotion ? 0 : -0.4 }}
-            transition={{ type: "spring", stiffness: 260, damping: 22 }}
-            style={{ perspective: 1200 }}
-          >
-            <img
-              ref={bergenImgRef}
-              src={IMAGES.homeBergenAside}
-              alt="Customer using self-serve laundry — we also offer pickup and delivery"
-              className="w-full h-56 md:h-72 object-cover scale-[1.06] will-change-transform"
-            />
-          </motion.div>
-        </div>
-      </motion.section>
 
-      {/* B — New Bridge snapshot */}
-      <motion.section
-        ref={newBridgeRef}
-        className="container-pad py-14 md:py-20"
-        data-testid="home-newbridge-block"
-        initial={{ opacity: 0, y: 28 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-          <motion.div
-            className="rounded-3xl overflow-hidden border border-slate-200/90 shadow-lg shadow-slate-900/8 ring-1 ring-white/50 order-2 lg:order-1 card-hover"
-            whileHover={{ scale: 1.02, rotateZ: reduceMotion ? 0 : 0.35 }}
-            transition={{ type: "spring", stiffness: 240, damping: 22 }}
-          >
-            <img
-              ref={nbImgRef}
-              src={IMAGES.homeNewBridgeAside}
-              alt="Laundry detergents and machines — drop-off wash and fold at New Bridge"
-              className="w-full h-56 md:h-72 object-cover scale-[1.05] will-change-transform"
-            />
-          </motion.div>
-          <div className="order-1 lg:order-2">
-            <p className="overline mb-2">{BRAND.store}</p>
-            <h2 className="h2">Where orders are processed</h2>
-            <span
-              className="mt-3 block h-1 w-24 rounded-full bg-gradient-to-r from-indigo-600 to-sky-400"
-              data-reveal-line
-              aria-hidden
-            />
-            <p className="mt-2 font-display text-lg font-semibold text-slate-900">
-              Wash, Dry &amp; Fold Service
-            </p>
-            <p className="mt-4 text-slate-600">
-              Tired of laundry day? Let us handle it!
-            </p>
-            <p className="mt-3 text-slate-600">
-              We use high-quality detergents to get your clothes their cleanest.
-            </p>
-            <p className="mt-3 text-slate-600">
-              Wash &amp; Fold Drop Off Laundry Service is available 7 days a week
-              at New Bridge Laundromat.
-            </p>
-            <dl className="mt-6 space-y-4 text-slate-800">
-              <div className="flex gap-2">
-                <MapPin className="h-5 w-5 text-blue-700 shrink-0 mt-0.5" />
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                    Address
-                  </dt>
-                  <dd className="font-medium">{LOCATIONS.newBridge.full}</dd>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Phone className="h-5 w-5 text-blue-700 shrink-0 mt-0.5" />
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                    Phone
-                  </dt>
-                  <dd>
-                    <a
-                      href={`tel:${BRAND.phoneStore}`}
-                      className="font-semibold text-blue-800"
-                    >
-                      {BRAND.phoneStore}
-                    </a>
-                  </dd>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Truck className="h-5 w-5 text-blue-700 shrink-0 mt-0.5" />
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                    Wash, dry &amp; fold (drop-off)
-                  </dt>
-                  <dd className="font-medium">
-                    {PRICING.newBridgeWashFoldLb}/lb
-                  </dd>
-                </div>
-              </div>
-              <div>
-                <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Hours
-                </dt>
-                <dd className="mt-1 text-sm">
-                  {HOURS.newBridgeWeekday}
-                  <br />
-                  {HOURS.newBridgeWeekend}
-                  <br />
-                  <span className="text-slate-500">{HOURS.lastWash}</span>
-                </dd>
-              </div>
-            </dl>
-            <motion.div className="mt-6 inline-block" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-            <Link
-              to="/new-bridge-laundromat"
-              className="btn-secondary mt-0 inline-flex"
-            >
-              Store details <ArrowRight className="h-4 w-4" />
-            </Link>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* C — Contact */}
+      {/* Contact */}
       <section
-        className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white py-14 md:py-20 overflow-hidden ring-1 ring-white/10"
+        className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white py-9 md:py-12 overflow-hidden ring-1 ring-white/10"
         id="contact"
       >
         <div
           className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_top_right,_rgb(59_130_246_/_0.35),_transparent_55%)]"
           aria-hidden
         />
-        <div className="container-pad relative grid md:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <motion.div className="container-pad relative grid md:grid-cols-2 gap-7 lg:gap-9 items-start">
           <div data-reveal>
             <p className="overline text-blue-300 mb-2">Contact Singh Laundry</p>
             <h2 className="h2 text-white">Reach the right team</h2>
@@ -649,7 +473,7 @@ export default function Home() {
             </p>
           </div>
           <div
-            className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md p-8 shadow-xl shadow-black/20"
+            className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md p-6 shadow-xl shadow-black/20"
             data-reveal-scale
           >
             <p className="text-slate-300 text-sm leading-relaxed">
@@ -663,11 +487,11 @@ export default function Home() {
               Contact form <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section
-        className="container-pad py-10 text-center text-sm text-slate-500"
+        className="container-pad py-7 text-center text-sm text-slate-500"
         data-reveal
       >
         <p className="mb-3">
