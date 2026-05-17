@@ -27,6 +27,8 @@ const carouselSlides = [
   { src: IMAGES.newBridgeCarousel1, alt: "New Bridge Laundromat — commercial dryers" },
   { src: IMAGES.newBridgeCarousel2, alt: "Wash, dry & fold — staff finishing orders" },
   { src: IMAGES.newBridgeCarousel3, alt: "Bergen Laundry Service delivery van" },
+  { src: IMAGES.newBridgeWashFoldLeft, alt: "Wash, dry & fold service — folded laundry" },
+  { src: IMAGES.newBridgeWashFoldRight, alt: "Clothing on hangers and rails — finishing and pickup" },
 ];
 
 const amenityIcons = [Wifi, Armchair, Tv, LayoutGrid, ShoppingBag, ShieldCheck];
@@ -66,7 +68,7 @@ export default function NewBridge() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
-      <section className="page-hero-section pb-5" data-reveal-blur>
+      <section className="page-hero-section pb-5 max-w-5xl" data-reveal-blur>
         <div className="logo-surface mx-auto mb-4 inline-flex rounded-2xl px-6 py-3">
           <img
             src={IMAGES.logoNewBridge}
@@ -74,25 +76,83 @@ export default function NewBridge() {
             className="h-12 md:h-14 w-auto max-w-[min(100%,18rem)] object-contain"
           />
         </div>
-        <p className="overline mb-2">{BRAND.store}</p>
-        <h1 className="h1">New Bridge Laundromat</h1>
+        <p className="overline mb-2 hidden">{BRAND.store}</p>
+        <h1 className="h1 lg:whitespace-nowrap">New Bridge Laundromat</h1>
         <span
           className="mt-4 mx-auto block h-1.5 w-28 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-500"
           data-reveal-line
           aria-hidden
         />
-        <p className="mt-4 text-slate-600 flex flex-wrap items-center justify-center gap-2 text-sm md:text-base">
+        <div className="mt-6 grid sm:grid-cols-3 gap-4" data-reveal-stagger>
+          <div className="surface-card p-5 text-center" data-reveal>
+            <span className="inline-block text-blue-800 will-change-transform" data-float>
+              <MapPin className="h-5 w-5" />
+            </span>
+            <p className="mt-2 text-xs font-semibold uppercase text-slate-500">Address</p>
+            <p className="mt-1 font-medium text-slate-900">{LOCATIONS.newBridge.full}</p>
+          </div>
+          <div className="surface-card p-5 text-center" data-reveal>
+            <span className="inline-block text-blue-800 will-change-transform" data-float-slow>
+              <Phone className="h-5 w-5" />
+            </span>
+            <p className="mt-2 text-xs font-semibold uppercase text-slate-500">Phone</p>
+            <a href={`tel:${BRAND.phoneStore}`} className="mt-1 font-semibold block text-blue-800">
+              {BRAND.phoneStore}
+            </a>
+          </div>
+          <div className="surface-card p-5 text-center" data-reveal>
+            <span className="inline-block text-blue-800 will-change-transform" data-float>
+              <Clock className="h-5 w-5" />
+            </span>
+            <p className="mt-2 text-xs font-semibold uppercase text-slate-500">Hours</p>
+            <p className="mt-1 text-sm font-medium text-slate-900">{HOURS.newBridgeWeekday}</p>
+            <p className="text-sm font-medium text-slate-900">{HOURS.newBridgeWeekend}</p>
+            <p className="text-sm text-slate-500 mt-1">{HOURS.lastWash}</p>
+          </div>
+        </div>
+        <div className="mt-8 text-center" data-reveal>
+          <h2 className="h2">Wash, Dry &amp; Fold Service</h2>
+          <p className="mt-3 text-base md:text-xl font-semibold text-slate-900">
+            {PRICING.newBridgeWashFoldLb}/lb Â· Next day pickup on most orders
+          </p>
+          <span
+            className="mt-3 mx-auto block h-1 w-24 rounded-full bg-gradient-to-r from-sky-500 to-blue-700"
+            data-reveal-line
+            aria-hidden
+          />
+          <p className="mt-5 text-slate-700 leading-relaxed text-sm md:text-base max-w-3xl mx-auto">
+            Tired of laundry day? Let us handle it! Simply drop off your dirty clothes, and
+            we&apos;ll take care of the rest. We wash, dry, and fold â€” then bundle everything for
+            easy pickup.
+          </p>
+          <ul className="mt-6 space-y-3 text-left text-sm text-slate-800 max-w-md mx-auto">
+            <li>
+              <strong>Self-serve:</strong> Coin operated &amp; laundry cards.
+            </li>
+            <li>
+              <strong>Time saver:</strong> Reclaim your weekends.
+            </li>
+            <li>
+              <strong>Professional clean:</strong> High-quality detergents and techniques.
+            </li>
+            <li>
+              <strong>Stress-free:</strong> We handle sorting, washing, and folding.
+            </li>
+          </ul>
+        </div>
+        <p className="mt-4 hidden text-slate-600 flex-wrap items-center justify-center gap-2 text-sm md:text-base">
           <MapPin className="h-4 w-4 text-blue-800 shrink-0" />
           <span>{LOCATIONS.newBridge.full}</span>
         </p>
-        <p className="mt-2">
+        <p className="mt-2 hidden">
           <a href={`tel:${BRAND.phoneStore}`} className="font-semibold text-blue-800 text-lg">
             {BRAND.phoneStore}
           </a>
         </p>
         <p className="mt-5 text-slate-600 leading-relaxed">
-          Newly renovated — updated <strong>November 2025</strong>. Our clean, comfortable
+          Newly renovated in late 2025. Our clean, comfortable
           laundromat is designed to make laundry day as easy and stress-free as possible.
+          <br />
           Pickup orders for <strong>{BRAND.pickup}</strong> are processed here.
         </p>
       </section>
@@ -141,7 +201,8 @@ export default function NewBridge() {
 
       <section className="container-pad pb-3 max-w-4xl mx-auto text-center" data-reveal>
         <p className="content-prose">
-          We are committed to providing a comfortable, efficient laundry experience for you.{" "}
+          We are committed to providing a comfortable, efficient laundry experience for you.
+          <br />
           <strong>Our first-class amenities include:</strong>
         </p>
       </section>
@@ -153,12 +214,12 @@ export default function NewBridge() {
             return (
               <div
                 key={a.title}
-                className="surface-card p-6 text-left"
+                className="surface-card p-6 text-center"
               >
                 <span className="inline-block text-blue-800" data-float-slow>
                   <Icon className="h-6 w-6" />
                 </span>
-                <h3 className="mt-4 font-display font-semibold text-slate-900">{a.title}</h3>
+                <h3 className="mt-4 font-display font-semibold text-slate-900 lg:text-xl">{a.title}</h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">{a.body}</p>
               </div>
             );
@@ -166,16 +227,16 @@ export default function NewBridge() {
         </div>
       </section>
 
-      <section className="container-pad pb-6 max-w-4xl mx-auto">
+      <section className="container-pad pb-6 max-w-4xl mx-auto hidden">
         <div className="grid sm:grid-cols-3 gap-4" data-reveal-stagger>
-          <div className="surface-card p-5" data-reveal>
+          <div className="surface-card p-5 text-center" data-reveal>
             <span className="inline-block text-blue-800 will-change-transform" data-float>
               <MapPin className="h-5 w-5" />
             </span>
             <p className="mt-2 text-xs font-semibold uppercase text-slate-500">Address</p>
             <p className="mt-1 font-medium text-slate-900">{LOCATIONS.newBridge.full}</p>
           </div>
-          <div className="surface-card p-5" data-reveal>
+          <div className="surface-card p-5 text-center" data-reveal>
             <span className="inline-block text-blue-800 will-change-transform" data-float-slow>
               <Phone className="h-5 w-5" />
             </span>
@@ -184,7 +245,7 @@ export default function NewBridge() {
               {BRAND.phoneStore}
             </a>
           </div>
-          <div className="surface-card p-5" data-reveal>
+          <div className="surface-card p-5 text-center" data-reveal>
             <span className="inline-block text-blue-800 will-change-transform" data-float>
               <Clock className="h-5 w-5" />
             </span>
@@ -201,13 +262,13 @@ export default function NewBridge() {
         data-reveal
       >
         <div className="container-pad max-w-5xl mx-auto">
-          <h2 className="h2 text-center">Wash, Dry &amp; Fold Service</h2>
+          <h2 className="h2 text-center hidden">Wash, Dry &amp; Fold Service</h2>
           <span
-            className="mt-3 mx-auto block h-1 w-24 rounded-full bg-gradient-to-r from-sky-500 to-blue-700"
+            className="mt-3 mx-auto hidden h-1 w-24 rounded-full bg-gradient-to-r from-sky-500 to-blue-700"
             data-reveal-line
             aria-hidden
           />
-          <div className="mt-6 grid lg:grid-cols-3 gap-6 items-center">
+          <div className="mt-6 hidden lg:grid-cols-3 gap-6 items-center">
             <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-lg order-2 lg:order-1">
               <img
                 src={IMAGES.newBridgeWashFoldLeft}
@@ -244,12 +305,11 @@ export default function NewBridge() {
               />
             </div>
           </div>
-          <ul className="mt-8 space-y-3 text-slate-700 max-w-3xl mx-auto">
+          <ul className="mt-8 hidden space-y-3 text-slate-700 max-w-3xl mx-auto">
             <li className="flex gap-2">
               <WashingMachine className="h-5 w-5 text-blue-800 shrink-0 mt-0.5" />
               <span>
-                <strong>Self-serve:</strong> Coin operated &amp; laundry cards — see desk for current
-                machine rates. Free WiFi.
+                <strong>Self-serve:</strong> Coin operated &amp; laundry cards.
               </span>
             </li>
             <li className="flex gap-2">
@@ -259,7 +319,15 @@ export default function NewBridge() {
               </span>
             </li>
           </ul>
-          <div className="mt-8 rounded-2xl border border-slate-200 bg-white overflow-hidden max-w-3xl mx-auto">
+          <div className="mt-8 text-center">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900">
+              Service pricing
+            </h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Current drop-off and dryer pricing.
+            </p>
+          </div>
+          <div className="mt-4 rounded-2xl border border-slate-200 bg-white overflow-hidden max-w-3xl mx-auto">
             <table className="w-full text-sm">
               <thead className="bg-slate-100 text-left">
                 <tr>
@@ -275,7 +343,10 @@ export default function NewBridge() {
                   ["Dryer", "$0.25 / 6 min"],
                   ["Wash · dry · fold (drop-off)", PRICING.newBridgeWashFoldLb + " / lb"],
                 ].map(([a, b]) => (
-                  <tr key={a} className="border-t border-slate-200">
+                  <tr
+                    key={a}
+                    className={`${a.includes("washer") ? "hidden " : ""}border-t border-slate-200`}
+                  >
                     <td className="p-4 font-medium">{a}</td>
                     <td className="p-4">{b}</td>
                   </tr>
@@ -289,7 +360,7 @@ export default function NewBridge() {
         </div>
       </section>
 
-      <section className="container-pad py-8 text-center" data-reveal-scale>
+      <section className="container-pad py-8 text-center hidden" data-reveal-scale>
         <motion.a
           href={SCHEDULE_ORDER_URL}
           target="_blank"

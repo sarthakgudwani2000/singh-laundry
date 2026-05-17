@@ -127,17 +127,17 @@ h6,
     @apply py-10 md:py-14 lg:py-16;
   }
   .h1 {
-    @apply text-4xl sm:text-5xl lg:text-[3.35rem] xl:text-6xl font-bold tracking-tight text-blue-900;
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-bold tracking-tight text-blue-900;
     font-family: "Outfit", sans-serif;
     text-wrap: balance;
   }
   .h2 {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-blue-900;
+    @apply text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-6xl font-bold tracking-tight text-blue-900;
     font-family: "Outfit", sans-serif;
     text-wrap: balance;
   }
   .h3 {
-    @apply text-2xl sm:text-3xl font-semibold tracking-tight text-blue-900;
+    @apply text-2xl sm:text-3xl lg:text-[2.125rem] font-semibold tracking-tight text-blue-900;
     font-family: "Outfit", sans-serif;
   }
   .glass-panel {
@@ -148,6 +148,9 @@ h6,
   }
   .glass-header {
     @apply border-b border-white/50 bg-white/70 backdrop-blur-2xl shadow-sm shadow-slate-900/5;
+  }
+  .site-header {
+    font-family: "D-DIN", "DIN Alternate", "Arial Narrow", "Outfit", "Manrope", sans-serif;
   }
   .card-hover {
     @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/10;

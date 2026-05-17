@@ -6,7 +6,7 @@ import {
   useGsapImgParallax,
   useGsapScrollReveal,
 } from "@/hooks/useGsapPageAnimations";
-import { ArrowRight, Check, Gift } from "lucide-react";
+import { ArrowRight, Check, Gift, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   BRAND,
   PRICING,
@@ -29,8 +29,16 @@ const pricing = [
   { item: "Comforters & bulky", price: "Quoted", note: "Each" },
 ];
 
+const bergenSlides = [
+  { src: IMAGES.bergenPromoVan, alt: "Bergen Laundry Service van and driver" },
+  { src: IMAGES.aboutBanner, alt: "Bergenfield laundry facility" },
+  { src: IMAGES.bergenPickupAside, alt: "Folded laundry ready for pickup orders" },
+  { src: IMAGES.bergenParallax, alt: "Laundry staging for pickup and delivery routes" },
+];
+
 export default function BergenLaundry() {
   const [specialOpen, setSpecialOpen] = useState(false);
+  const [slide, setSlide] = useState(0);
   const { hash } = useLocation();
   const pageRef = useRef(null);
   const heroImgSectionRef = useRef(null);
@@ -76,6 +84,10 @@ export default function BergenLaundry() {
     }
   }, [hash]);
 
+  const next = () => setSlide((i) => (i + 1) % bergenSlides.length);
+  const prev = () =>
+    setSlide((i) => (i - 1 + bergenSlides.length) % bergenSlides.length);
+
   return (
     <motion.div
       ref={pageRef}
@@ -87,28 +99,77 @@ export default function BergenLaundry() {
       <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} />
 
       <section className="page-hero-section pb-5" data-reveal-blur>
-        <p className="overline mb-3">{BRAND.pickup}</p>
-        <h1 className="h1 max-w-3xl">Pickup &amp; delivery</h1>
+        <div className="mx-auto mb-4 flex w-44 h-44 items-center justify-center">
+          <img
+            src={IMAGES.logoBergen}
+            alt="Bergen Laundry Service"
+            className="h-full w-full object-contain"
+          />
+        </div>
+        <p className="overline mb-3 hidden">{BRAND.pickup}</p>
+        <h1 className="h1 max-w-3xl lg:whitespace-nowrap">Bergen Laundry Service</h1>
+        <h2 className="mt-3 font-display text-xl md:text-2xl font-semibold text-slate-900">
+          Welcome To North Jersey&apos;s Best FREE Laundry Pickup &amp; Delivery Service
+        </h2>
         <span
-          className="mt-4 block h-1.5 w-28 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-500"
+          className="mt-4 mx-auto block h-1.5 w-28 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-500"
           data-reveal-line
           aria-hidden
         />
-        <p className="mt-5 text-slate-600 text-lg max-w-2xl leading-relaxed">
-          <strong>{BRAND.parent}</strong> is the parent company of{" "}
-          <strong>{BRAND.pickup}</strong> and <strong>{BRAND.store}</strong>.
-          Pickup orders are washed, dried, and folded at{" "}
-          <strong>{BRAND.store}</strong>, {LOCATIONS.newBridge.full}.
-        </p>
-        <p className="mt-5 text-slate-600 text-lg max-w-2xl leading-relaxed">
-          $2.15 per pound* / No Charge For Pickup &amp; Delivery / Next Day
-          Returns Mon-Fri
-        </p>
-        <p className="mt-3 text-slate-600 text-lg max-w-2xl leading-relaxed">
-          Automatic Recurring Orders Can Be Set / Volume Based Discounts
-          Available
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-6 max-w-3xl mx-auto rounded-3xl border border-blue-200/70 bg-white/90 p-5 md:p-7 shadow-2xl shadow-blue-900/10 ring-1 ring-white/90 backdrop-blur-xl">
+          <p className="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-sky-50 px-4 py-3 text-slate-700 text-base md:text-lg leading-relaxed ring-1 ring-blue-100/80">
+            <span className="hidden">
+              <strong>{BRAND.parent}</strong> is the parent company of{" "}
+              <strong>{BRAND.pickup}</strong> and <strong>{BRAND.store}</strong>.
+            </span>
+            Pickup orders are washed, dried, and folded at{" "}
+            <strong>{BRAND.store}</strong>, {LOCATIONS.newBridge.full}.
+          </p>
+          <p className="mt-5 flex flex-wrap justify-center gap-2 rounded-2xl border border-blue-100 bg-white/85 px-4 py-3 font-display text-base md:text-lg font-semibold text-blue-950 shadow-sm">
+            <span className="inline-flex rounded-full bg-blue-50 px-4 py-2 ring-1 ring-blue-100">
+              $2.15 per pound*
+            </span>
+            <span className="inline-flex rounded-full bg-blue-50 px-4 py-2 ring-1 ring-blue-100">
+              No Charge For Pickup &amp; Delivery
+            </span>
+            <span className="inline-flex rounded-full bg-blue-50 px-4 py-2 ring-1 ring-blue-100">
+              Next Day Returns Mon-Fri
+            </span>
+          </p>
+          <p className="mt-3 rounded-2xl bg-slate-50/90 px-4 py-3 text-slate-700 text-base md:text-lg font-medium leading-relaxed ring-1 ring-slate-200/80">
+            Automatic Recurring Orders Can Be Set / Volume Based Discounts
+            Available
+          </p>
+          <p className="mt-2 text-slate-500 text-sm leading-relaxed">
+            *{PRICING.ccFeeNote} / *min order: {PRICING.minOrderLbs} lbs
+          </p>
+          <p className="mt-3 rounded-2xl bg-gradient-to-r from-blue-700 via-blue-600 to-sky-500 px-4 py-3 font-display text-lg md:text-xl font-bold leading-relaxed text-white shadow-lg shadow-blue-700/25 ring-1 ring-blue-300/40">
+            {PRICING.firstOrderAmount} Off Your 1st Order!!! / Coupon Code:{" "}
+            <span className="font-mono rounded-lg bg-white/15 px-2 py-0.5">{PRICING.firstOrderCode}</span>
+          </p>
+          <p className="mt-4 rounded-2xl border border-blue-100 bg-white/75 px-4 py-3 text-sm text-slate-600 leading-relaxed">
+            Orders are billed by weight. Some{" "}
+            <button
+              type="button"
+              onClick={() => setSpecialOpen(true)}
+              className="text-blue-800 font-medium underline underline-offset-2"
+            >
+              Special Items
+            </button>{" "}
+            are billed individually.
+          </p>
+          <p className="mt-2 rounded-2xl border border-slate-200 bg-slate-50/90 px-4 py-3 text-sm text-slate-600 leading-relaxed">
+            <a
+              href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
+              className="text-blue-800 font-medium underline underline-offset-2"
+              download
+            >
+              Terms of Service
+            </a>{" "}
+            for Laundry Pickup and Delivery
+          </p>
+        </div>
+        <div className="mt-8 hidden flex-wrap gap-3">
           <a
             href={SCHEDULE_ORDER_URL}
             target="_blank"
@@ -133,9 +194,9 @@ export default function BergenLaundry() {
 
       {/* Same “seal + van + FIRST10” row as singhlaundry.com home */}
       <section className="container-pad pb-7 md:pb-9" data-testid="bergen-home-mirror-promo">
-        <div className="grid lg:grid-cols-3 gap-8 lg:gap-6 items-center">
-          <div className="flex justify-center lg:justify-start" data-reveal>
-            <div className="w-44 h-44 rounded-full border-4 border-blue-800 bg-gradient-to-br from-sky-50 via-blue-50 to-white flex flex-col items-center justify-center p-4 shadow-xl shadow-blue-900/15 ring-4 ring-sky-100/90">
+        <div className="max-w-4xl mx-auto">
+          <div className="hidden justify-center lg:justify-start" data-reveal>
+            <div className="w-44 h-44 flex flex-col items-center justify-center p-4">
               <img
                 src={IMAGES.logoBergen}
                 alt="Bergen Laundry Service"
@@ -144,21 +205,52 @@ export default function BergenLaundry() {
             </div>
           </div>
           <div
-            className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl min-h-[260px] md:min-h-[300px]"
+            className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl min-h-[300px] md:min-h-[380px]"
             data-reveal-scale
           >
             <img
-              src={IMAGES.bergenPromoVan}
-              alt="Route vehicle loading laundry for pickup and delivery"
+              src={bergenSlides[slide].src}
+              alt={bergenSlides[slide].alt}
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent pointer-events-none" aria-hidden />
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full bg-emerald-500 text-white font-display font-bold text-xs md:text-sm tracking-wide shadow-lg whitespace-nowrap ring-2 ring-white/40">
+            <div className="hidden absolute bottom-4 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full bg-emerald-500 text-white font-display font-bold text-xs md:text-sm tracking-wide shadow-lg whitespace-nowrap ring-2 ring-white/40">
               BERGEN LAUNDRY SERVICE
+            </div>
+            <div className="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none">
+              <button
+                type="button"
+                onClick={prev}
+                className="pointer-events-auto h-11 w-11 rounded-full bg-white/90 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
+                aria-label="Previous photo"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                className="pointer-events-auto h-11 w-11 rounded-full bg-white/90 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
+                aria-label="Next photo"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {bergenSlides.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setSlide(i)}
+                  className={`h-2 w-2 rounded-full transition-colors ${
+                    i === slide ? "bg-white" : "bg-white/50"
+                  }`}
+                  aria-label={`Show slide ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
           <div
-            className="text-center lg:text-left rounded-2xl border-2 border-dashed border-emerald-400 bg-emerald-50/90 p-6 md:p-8 shadow-inner"
+            className="hidden text-center lg:text-left rounded-2xl border-2 border-dashed border-emerald-400 bg-emerald-50/90 p-6 md:p-8 shadow-inner"
             data-reveal
           >
             <p className="font-display text-xl md:text-2xl font-bold text-emerald-900">
@@ -321,7 +413,11 @@ export default function BergenLaundry() {
               *Special Items
             </button>
             <span> / </span>
-            <a href="#terms" className="text-blue-800 font-medium underline underline-offset-2">
+            <a
+              href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
+              className="text-blue-800 font-medium underline underline-offset-2"
+              download
+            >
               Terms of Service
             </a>
           </p>
@@ -429,7 +525,11 @@ export default function BergenLaundry() {
             *Special Items
           </button>
           <span> / </span>
-          <a href="#terms" className="text-blue-800 font-medium underline underline-offset-2">
+          <a
+            href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
+            className="text-blue-800 font-medium underline underline-offset-2"
+            download
+          >
             Terms of Service
           </a>
         </p>

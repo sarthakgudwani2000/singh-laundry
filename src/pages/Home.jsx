@@ -16,6 +16,8 @@ import {
 import {
   ArrowRight,
   Clock,
+  ChevronLeft,
+  ChevronRight,
   MapPin,
   Phone,
   RefreshCw,
@@ -31,8 +33,30 @@ import {
   SCHEDULE_ORDER_URL,
 } from "@/lib/brand";
 
+const homeSlides = [
+  {
+    src: IMAGES.servicesPickup,
+    alt: "Bergen Laundry Service pickup and delivery",
+    title: "Pickup & delivery",
+    detail: "Bergen Laundry Service brings fresh folded laundry back to your door.",
+  },
+  {
+    src: IMAGES.servicesWashFold,
+    alt: "Wash, dry, and fold service",
+    title: "Wash, dry & fold",
+    detail: "Drop-off laundry care handled at New Bridge Laundromat.",
+  },
+  {
+    src: IMAGES.servicesSelfServe,
+    alt: "In-store laundry service",
+    title: "In-store laundry",
+    detail: "Self-service machines, laundry cards, seating, and folding space.",
+  },
+];
+
 export default function Home() {
   const [specialOpen, setSpecialOpen] = useState(false);
+  const [homeSlide, setHomeSlide] = useState(0);
   const reduceMotionPref = useReducedMotion();
   const reduceMotion = reduceMotionPref === true;
   const homeRootRef = useRef(null);
@@ -47,6 +71,10 @@ export default function Home() {
   const spotX = useTransform(mxS, (v) => v * 100);
   const spotY = useTransform(myS, (v) => v * 100);
   const spotlight = useMotionTemplate`radial-gradient(520px circle at ${spotX}% ${spotY}%, rgba(59, 130, 246, 0.2), transparent 62%)`;
+
+  const nextHomeSlide = () => setHomeSlide((i) => (i + 1) % homeSlides.length);
+  const prevHomeSlide = () =>
+    setHomeSlide((i) => (i - 1 + homeSlides.length) % homeSlides.length);
 
   useGsapScrollReveal(homeRootRef, reduceMotion);
   useGsapFloatAccents(homeRootRef, reduceMotion);
@@ -122,10 +150,10 @@ export default function Home() {
       {/* Hero + parent clarity */}
       <section
         ref={heroRef}
-        className="container-pad pt-8 md:pt-10 pb-8 md:pb-10"
+        className="container-pad pt-5 md:pt-7 pb-8 md:pb-10"
       >
         <motion.div
-          className="relative overflow-hidden rounded-[2rem] glass-panel p-6 md:p-8 lg:p-10 border border-white/80"
+          className="relative overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white p-5 md:p-8 lg:p-10 shadow-2xl shadow-slate-900/10 ring-1 ring-white/90"
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
@@ -141,22 +169,22 @@ export default function Home() {
         ) : null}
         <div
           ref={heroOrb1Ref}
-          className="pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-sky-300/30 blur-3xl z-0 will-change-transform"
+          className="hidden pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-sky-300/30 blur-3xl z-0 will-change-transform"
           aria-hidden
         />
         <div
           ref={heroOrb2Ref}
-          className="pointer-events-none absolute -left-20 bottom-0 h-48 w-48 rounded-full bg-blue-200/25 blur-3xl z-0 will-change-transform"
+          className="hidden pointer-events-none absolute -left-20 bottom-0 h-48 w-48 rounded-full bg-blue-200/25 blur-3xl z-0 will-change-transform"
           aria-hidden
         />
         <motion.div
-          className="relative z-[2] grid lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 items-center"
+          className="relative z-[2] grid lg:grid-cols-2 gap-7 lg:gap-10 xl:gap-12 items-center"
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="min-w-0">
-            <motion.div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <div className="min-w-0 lg:col-span-2">
+            <motion.div className="hidden flex-wrap items-center gap-x-3 gap-y-1">
               <p className="overline mb-0">Singh Laundry</p>
               <span className="hidden sm:inline text-slate-300" aria-hidden>
                 ·
@@ -166,11 +194,113 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <h1 className="h1 mt-4 max-w-xl lg:max-w-none">
-              North Jersey&apos;s best free laundry pickup &amp; delivery
+            <h1 className="mt-1 max-w-5xl mx-auto text-center font-display font-bold leading-tight text-slate-950">
+              <span className="block text-3xl sm:text-4xl lg:text-5xl">
+                Welcome to Singh Laundry,
+              </span>
+              <span className="mt-2 block text-2xl sm:text-3xl lg:text-4xl text-blue-950">
+                the home of Bergen Laundry Serrvice &amp; New Bridge Laundromat in Bergenfield, NJ
+              </span>
             </h1>
+            <h2 className="mt-4 max-w-3xl mx-auto text-center font-display text-lg md:text-2xl font-semibold text-slate-700">
+              North Jersey&apos;s best free laundry pickup &amp; delivery service
+            </h2>
+            <span
+              className="mt-4 mx-auto block h-1.5 w-32 rounded-full bg-gradient-to-r from-blue-700 via-sky-500 to-indigo-500"
+              aria-hidden
+            />
 
-            <p className="mt-4 text-base md:text-lg text-slate-600 max-w-xl leading-relaxed">
+            <div className="mt-7 relative mx-auto max-w-5xl rounded-[1.75rem] overflow-hidden border border-slate-200 bg-slate-950 shadow-2xl shadow-slate-900/20 ring-1 ring-white/80 group card-hover">
+              <img
+                src={homeSlides[homeSlide].src}
+                alt={homeSlides[homeSlide].alt}
+                className="w-full h-60 md:h-[28rem] object-cover transition-opacity duration-300"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent md:block" aria-hidden />
+              <div className="absolute bottom-4 left-4 right-4 hidden flex-col gap-3 md:left-6 md:right-6 md:flex md:flex-row md:items-end md:justify-between">
+                <div className="max-w-xl text-white">
+                  <p className="font-display text-2xl md:text-3xl font-bold leading-tight">
+                    {homeSlides[homeSlide].title}
+                  </p>
+                  <p className="mt-1 text-sm md:text-base text-white/85 leading-relaxed">
+                    {homeSlides[homeSlide].detail}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 text-xs font-semibold text-white">
+                  {homeSlides.map((item, i) => (
+                    <button
+                      key={item.title}
+                      type="button"
+                      onClick={() => setHomeSlide(i)}
+                      className={`rounded-full px-3 py-1.5 backdrop-blur-sm transition-colors ${
+                        i === homeSlide
+                          ? "bg-white text-blue-900"
+                          : "bg-white/20 text-white hover:bg-white/30"
+                      }`}
+                    >
+                      {item.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none">
+                <button
+                  type="button"
+                  onClick={prevHomeSlide}
+                  className="pointer-events-auto h-11 w-11 rounded-full bg-white/95 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  type="button"
+                  onClick={nextHomeSlide}
+                  className="pointer-events-auto h-11 w-11 rounded-full bg-white/95 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </div>
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-1.5 rounded-full bg-slate-950/35 px-2.5 py-2 backdrop-blur-sm">
+                {homeSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setHomeSlide(i)}
+                    className={`h-2 w-2 rounded-full transition-colors ${
+                      i === homeSlide ? "bg-white" : "bg-white/50"
+                    }`}
+                    aria-label={`Show slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <div className="p-4 text-white md:hidden">
+                <p className="font-display text-xl font-bold leading-tight">
+                  {homeSlides[homeSlide].title}
+                </p>
+                <p className="mt-1 text-sm text-white/85 leading-relaxed">
+                  {homeSlides[homeSlide].detail}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
+                  {homeSlides.map((item, i) => (
+                    <button
+                      key={item.title}
+                      type="button"
+                      onClick={() => setHomeSlide(i)}
+                      className={`rounded-full px-3 py-1.5 transition-colors ${
+                        i === homeSlide
+                          ? "bg-white text-blue-900"
+                          : "bg-white/15 text-white hover:bg-white/25"
+                      }`}
+                    >
+                      {item.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <p className="hidden mt-4 text-base md:text-lg text-slate-600 max-w-xl leading-relaxed">
               <span className="font-display font-semibold text-slate-800">
                 New Jersey&apos;s finest laundromats
               </span>
@@ -180,7 +310,7 @@ export default function Home() {
               under <strong>{BRAND.parent}</strong>.
             </p>
 
-            <ul className="mt-6 grid sm:grid-cols-2 gap-3" aria-label="Service highlights">
+            <ul className="hidden mt-6 sm:grid-cols-2 gap-3" aria-label="Service highlights">
               {heroHighlights.map(({ icon: Icon, title, detail }) => (
                 <li
                   key={title}
@@ -201,7 +331,7 @@ export default function Home() {
               ))}
             </ul>
 
-            <p className="mt-4 text-sm text-slate-600 max-w-xl">
+            <p className="hidden mt-4 text-sm text-slate-600 max-w-xl">
               Pickup orders are washed, dried, and folded at our Bergenfield
               location.{" "}
               <Link
@@ -212,7 +342,7 @@ export default function Home() {
               </Link>
             </p>
 
-            <motion.div className="mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
+            <motion.div className="hidden mt-7 flex-col sm:flex-row flex-wrap gap-3">
               <motion.a
                 href={SCHEDULE_ORDER_URL}
                 target="_blank"
@@ -238,7 +368,7 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            <p className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
+            <p className="hidden mt-5 flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
               <a
                 href={`tel:${BRAND.phoneBergen}`}
                 className="inline-flex items-center gap-1.5 font-medium hover:text-slate-800"
@@ -255,7 +385,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative min-h-[220px] sm:min-h-[260px] lg:min-h-[340px] rounded-2xl overflow-hidden border border-slate-200/90 shadow-lg shadow-slate-900/10 ring-1 ring-white/70">
+          <div className="hidden relative min-h-[220px] sm:min-h-[260px] lg:min-h-[340px] rounded-2xl overflow-hidden border border-slate-200/90 shadow-lg shadow-slate-900/10 ring-1 ring-white/70">
             <img
               src={IMAGES.homePromoVan}
               alt="Bergen Laundry Service delivery van — free pickup and delivery"
@@ -504,12 +634,13 @@ export default function Home() {
             *Special Items
           </button>
           <span> / </span>
-          <Link
-            to="/bergen-laundry-service#terms"
+          <a
+            href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
             className="text-blue-800 font-medium underline underline-offset-2"
+            download
           >
             Terms of Service
-          </Link>
+          </a>
         </p>
         <Link to="/services" className="text-blue-800 font-medium">
           View all services

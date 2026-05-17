@@ -42,7 +42,7 @@ export default function Privacy() {
 
       <div className="mt-6 space-y-6 text-slate-700 text-sm leading-relaxed">
         <section data-reveal>
-          <h2 className="font-display text-lg font-semibold text-slate-900">
+          <h2 className="font-display text-lg lg:text-xl font-semibold text-slate-900">
             Who we are
           </h2>
           <p className="mt-2">
@@ -61,7 +61,7 @@ export default function Privacy() {
         </section>
 
         <section data-reveal>
-          <h2 className="font-display text-lg font-semibold text-slate-900">
+          <h2 className="font-display text-lg lg:text-xl font-semibold text-slate-900">
             Information we collect
           </h2>
           <p className="mt-2">
@@ -73,7 +73,7 @@ export default function Privacy() {
         </section>
 
         <section data-reveal>
-          <h2 className="font-display text-lg font-semibold text-slate-900">
+          <h2 className="font-display text-lg lg:text-xl font-semibold text-slate-900">
             How we use your information
           </h2>
           <p className="mt-2">
@@ -84,7 +84,7 @@ export default function Privacy() {
         </section>
 
         <section data-reveal>
-          <h2 className="font-display text-lg font-semibold text-slate-900">
+          <h2 className="font-display text-lg lg:text-xl font-semibold text-slate-900">
             Cookies &amp; analytics
           </h2>
           <p className="mt-2">
@@ -95,7 +95,7 @@ export default function Privacy() {
         </section>
 
         <section data-reveal>
-          <h2 className="font-display text-lg font-semibold text-slate-900">
+          <h2 className="font-display text-lg lg:text-xl font-semibold text-slate-900">
             Retention
           </h2>
           <p className="mt-2">
@@ -105,7 +105,7 @@ export default function Privacy() {
         </section>
 
         <section data-reveal>
-          <h2 className="font-display text-lg font-semibold text-slate-900">
+          <h2 className="font-display text-lg lg:text-xl font-semibold text-slate-900">
             Changes
           </h2>
           <p className="mt-2">

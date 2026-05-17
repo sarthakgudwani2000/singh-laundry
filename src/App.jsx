@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import "@/App.css";
-import { pathnamePrefixBeforeAssetsChunk } from "@/lib/utils";
 import { SCHEDULE_ORDER_URL } from "@/lib/brand";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
@@ -12,13 +11,6 @@ import NewBridge from "@/pages/NewBridge";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Privacy from "@/pages/Privacy";
-
-/** Match React Router to Vite `base` when the app is served from a subpath (e.g. /testsite/). */
-function routerBasename() {
-  const b = import.meta.env.BASE_URL;
-  if (b !== "/" && b !== "./") return b.replace(/\/$/, "") || undefined;
-  return pathnamePrefixBeforeAssetsChunk();
-}
 
 function RedirectToExternalBooking() {
   useEffect(() => {
@@ -35,7 +27,7 @@ export default function App() {
   return (
     <div className="App">
       <Toaster position="top-right" richColors />
-      <BrowserRouter basename={routerBasename()}>
+      <HashRouter>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -70,7 +62,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

@@ -61,12 +61,12 @@ export const SERVICE_AREA_LINES = [
 /** Services page — section bodies from the legacy template. */
 export const SERVICES_TEMPLATE = {
   selfServe: {
-    title: "Self-Service @ New Bridge Laundromat in Bergenfield, NJ",
+    title: "In-Store Services @ New Bridge Laundromat in Bergenfield, NJ",
     body: "Enjoy a top-rated self-service laundry experience in Bergen County. Our {{store}} location offers FREE Wi‑Fi, comfortable seating, TVs, folding stations, and vending machines — everything you need while your loads run.",
   },
   pickup: {
     title: "Pickup & Delivery Service",
-    intro: "Let {{pickup}} handle the heavy lifting. Schedule a pickup and we’ll return your laundry fresh, folded, and ready to put away.",
+    intro: "Let {{pickup}} handle the heavy lifting. Schedule a pickup and we’ll return your laundry fresh, folded, and ready to put away the next day.",
     benefits: [
       {
         title: "Unmatched Convenience",

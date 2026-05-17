@@ -65,7 +65,7 @@ export default function Footer() {
       />
       <div className="container-pad relative py-9 grid md:grid-cols-4 gap-7">
         <div>
-          <h3 className="font-display text-white text-xl font-bold">
+          <h3 className="font-display text-white text-xl lg:text-2xl font-bold">
             {BRAND.parent}
           </h3>
           <p className="mt-3 text-sm text-slate-400 leading-relaxed max-w-xs">
@@ -79,7 +79,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-white font-semibold mb-3">Services</h4>
+          <h4 className="font-display text-white font-semibold mb-3 lg:text-lg">Services</h4>
           <ul className="space-y-2 text-sm">
             <li>
               <Link to="/services" className="hover:text-white transition-colors">
@@ -110,7 +110,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-white font-semibold mb-3">Company</h4>
+          <h4 className="font-display text-white font-semibold mb-3 lg:text-lg">Company</h4>
           <ul className="space-y-2 text-sm">
             <li>
               <Link to="/about" className="hover:text-white">
@@ -136,7 +136,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-white font-semibold mb-3">
+          <h4 className="font-display text-white font-semibold mb-3 lg:text-lg">
             Contact
           </h4>
           <ul className="space-y-2 text-sm">

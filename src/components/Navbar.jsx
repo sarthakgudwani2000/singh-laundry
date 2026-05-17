@@ -168,8 +168,8 @@ export default function Navbar() {
         className={[
           "site-header border-b transition-[box-shadow,background-color] duration-300",
           elevated
-            ? "bg-white/92 shadow-md shadow-slate-900/[0.06] backdrop-blur-xl border-slate-200/90"
-            : "bg-white/75 backdrop-blur-xl border-slate-200/60",
+            ? "bg-white/92 lg:bg-white shadow-md shadow-slate-900/[0.06] backdrop-blur-xl border-slate-200/90"
+            : "bg-white/75 lg:bg-white backdrop-blur-xl border-slate-200/60",
         ].join(" ")}
         data-testid="site-header"
       >
@@ -185,7 +185,11 @@ export default function Navbar() {
                   : `${BRAND.parent} home`
               }
             >
-              <div className="logo-surface relative flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-[1.03] group-hover:shadow-lg overflow-hidden p-1.5">
+              <div
+                className={`logo-surface relative flex shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-[1.03] group-hover:shadow-lg overflow-hidden p-1.5 ${
+                  isBergenPickupPage ? "h-11 w-11" : "h-[4.5rem] w-[4.5rem]"
+                }`}
+              >
                 {isBergenPickupPage ? (
                   <img
                     src={IMAGES.logoBergen}
@@ -201,10 +205,10 @@ export default function Navbar() {
                 )}
               </div>
               <div className="min-w-0 leading-tight">
-                <span className="block font-display text-[0.9375rem] font-bold tracking-tight text-blue-600 transition-colors group-hover:text-blue-700 md:text-base">
+                <span className="block whitespace-nowrap font-display text-[0.9375rem] font-bold tracking-tight text-blue-600 transition-colors group-hover:text-blue-700 md:text-base lg:text-xl">
                   {isBergenPickupPage ? BRAND.pickup : BRAND.parent}
                 </span>
-                <span className="hidden text-[10px] font-medium text-blue-800/90 sm:block">
+                <span className="hidden whitespace-nowrap text-[10px] font-medium text-blue-800/90 sm:block lg:text-sm">
                   {isBergenPickupPage
                     ? `A ${BRAND.parent} brand`
                     : "Trust Us With Your Threads"}
@@ -221,7 +225,7 @@ export default function Navbar() {
                       end={l.to === "/"}
                       className={({ isActive }) =>
                         [
-                          "relative block rounded-lg px-2.5 py-2 text-xs font-medium tracking-tight transition-colors xl:px-3",
+                          "relative block whitespace-nowrap rounded-lg px-2.5 py-2 text-xs font-medium tracking-tight transition-colors lg:text-[0.9375rem] xl:text-base xl:px-3",
                           isActive
                             ? "text-blue-900"
                             : "text-blue-600 hover:bg-blue-50/90 hover:text-blue-800",
@@ -249,7 +253,7 @@ export default function Navbar() {
             </nav>
 
             <div className="hidden shrink-0 items-center gap-4 lg:flex">
-              <div className="flex flex-col items-end text-right text-xs">
+              <div className="flex flex-col items-center text-center text-xs lg:text-base">
                 <a
                   href={`tel:${BRAND.phoneBergen}`}
                   className="font-semibold tabular-nums text-blue-600 transition hover:text-blue-800"
@@ -258,7 +262,7 @@ export default function Navbar() {
                 </a>
                 <a
                   href={`mailto:${BRAND.email}`}
-                  className="max-w-[10.5rem] truncate text-[11px] text-blue-600/90 transition hover:text-blue-800"
+                  className="max-w-[10.5rem] truncate text-[11px] text-blue-600/90 transition hover:text-blue-800 lg:text-sm"
                 >
                   {BRAND.email}
                 </a>
@@ -267,10 +271,10 @@ export default function Navbar() {
                 href={SCHEDULE_ORDER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-blue-400 via-blue-500 to-blue-700 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/35 ring-1 ring-white/20 transition hover:from-blue-300 hover:via-blue-500 hover:to-blue-600 hover:shadow-lg"
+                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-blue-400 via-blue-500 to-blue-700 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/35 ring-1 ring-white/20 transition hover:from-blue-300 hover:via-blue-500 hover:to-blue-600 hover:shadow-lg lg:text-base"
                 data-testid="navbar-cta-schedule"
               >
-                Schedule
+                Schuedule a Pickup
                 <ArrowRight className="h-4 w-4 opacity-90" />
               </a>
             </div>

@@ -54,7 +54,7 @@ export default function About() {
         </div>
       </section>
 
-      <section ref={imgSectionRef} className="container-pad pb-9 max-w-4xl mx-auto" data-reveal-clip>
+      <section ref={imgSectionRef} className="hidden container-pad pb-9 max-w-4xl mx-auto" data-reveal-clip>
         <img
           ref={imgRef}
           src={IMAGES.aboutBanner}
@@ -72,7 +72,7 @@ export default function About() {
       >
         <div className="container-pad max-w-2xl mx-auto text-center">
           <div data-reveal>
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900">
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
               Areas We Service
             </h2>
           <span
@@ -95,7 +95,7 @@ export default function About() {
         </div>
       </motion.section>
 
-      <section className="container-pad py-9">
+      <section className="hidden container-pad py-9">
         <div
           className="rounded-[2rem] bg-gradient-to-br from-blue-800 via-blue-900 to-slate-900 text-white p-8 md:p-12 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between shadow-xl shadow-blue-900/30 ring-1 ring-white/15 max-w-3xl mx-auto"
           data-reveal-glow
