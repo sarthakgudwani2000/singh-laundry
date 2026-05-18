@@ -32,8 +32,8 @@ const pricing = [
 const bergenSlides = [
   { src: IMAGES.bergenPromoVan, alt: "Bergen Laundry Service van and driver" },
   { src: IMAGES.aboutBanner, alt: "Bergenfield laundry facility" },
-  { src: IMAGES.bergenPickupAside, alt: "Folded laundry ready for pickup orders" },
-  { src: IMAGES.bergenParallax, alt: "Laundry staging for pickup and delivery routes" },
+  { src: IMAGES.bergenPickupAside, alt: "Folded laundry ready for pickup orders", hidden: true },
+  { src: IMAGES.bergenParallax, alt: "Laundry staging for pickup and delivery routes", hidden: true },
 ];
 
 export default function BergenLaundry() {
@@ -44,6 +44,7 @@ export default function BergenLaundry() {
   const heroImgSectionRef = useRef(null);
   const heroImgRef = useRef(null);
   const reduceMotion = useReducedMotion() === true;
+  const visibleBergenSlides = bergenSlides.filter((s) => !s.hidden);
 
   useGsapScrollReveal(pageRef, reduceMotion);
   useGsapFloatAccents(pageRef, reduceMotion);
@@ -84,9 +85,9 @@ export default function BergenLaundry() {
     }
   }, [hash]);
 
-  const next = () => setSlide((i) => (i + 1) % bergenSlides.length);
+  const next = () => setSlide((i) => (i + 1) % visibleBergenSlides.length);
   const prev = () =>
-    setSlide((i) => (i - 1 + bergenSlides.length) % bergenSlides.length);
+    setSlide((i) => (i - 1 + visibleBergenSlides.length) % visibleBergenSlides.length);
 
   return (
     <motion.div
@@ -140,14 +141,14 @@ export default function BergenLaundry() {
             Automatic Recurring Orders Can Be Set / Volume Based Discounts
             Available
           </p>
-          <p className="mt-2 text-slate-500 text-sm leading-relaxed">
+          <p className="mt-3 rounded-2xl bg-slate-50/90 px-4 py-3 text-slate-700 text-base md:text-lg font-medium leading-relaxed ring-1 ring-slate-200/80">
             *{PRICING.ccFeeNote} / *min order: {PRICING.minOrderLbs} lbs
           </p>
           <p className="mt-3 rounded-2xl bg-gradient-to-r from-blue-700 via-blue-600 to-sky-500 px-4 py-3 font-display text-lg md:text-xl font-bold leading-relaxed text-white shadow-lg shadow-blue-700/25 ring-1 ring-blue-300/40">
             {PRICING.firstOrderAmount} Off Your 1st Order!!! / Coupon Code:{" "}
             <span className="font-mono rounded-lg bg-white/15 px-2 py-0.5">{PRICING.firstOrderCode}</span>
           </p>
-          <p className="mt-4 rounded-2xl border border-blue-100 bg-white/75 px-4 py-3 text-sm text-slate-600 leading-relaxed">
+          <p className="mt-3 rounded-2xl bg-slate-50/90 px-4 py-3 text-slate-700 text-base md:text-lg font-medium leading-relaxed ring-1 ring-slate-200/80">
             Orders are billed by weight. Some{" "}
             <button
               type="button"
@@ -158,11 +159,10 @@ export default function BergenLaundry() {
             </button>{" "}
             are billed individually.
           </p>
-          <p className="mt-2 rounded-2xl border border-slate-200 bg-slate-50/90 px-4 py-3 text-sm text-slate-600 leading-relaxed">
+          <p className="mt-3 rounded-2xl bg-slate-50/90 px-4 py-3 text-slate-700 text-base md:text-lg font-medium leading-relaxed ring-1 ring-slate-200/80">
             <a
               href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
               className="text-blue-800 font-medium underline underline-offset-2"
-              download
             >
               Terms of Service
             </a>{" "}
@@ -209,8 +209,8 @@ export default function BergenLaundry() {
             data-reveal-scale
           >
             <img
-              src={bergenSlides[slide].src}
-              alt={bergenSlides[slide].alt}
+              src={visibleBergenSlides[slide].src}
+              alt={visibleBergenSlides[slide].alt}
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent pointer-events-none" aria-hidden />
@@ -236,7 +236,7 @@ export default function BergenLaundry() {
               </button>
             </div>
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-              {bergenSlides.map((_, i) => (
+              {visibleBergenSlides.map((_, i) => (
                 <button
                   key={i}
                   type="button"
@@ -279,7 +279,7 @@ export default function BergenLaundry() {
 
       {/* Pickup pricing & policies */}
       <motion.section
-        className="border-y border-slate-200/80 bg-gradient-to-b from-slate-50/95 to-white py-9 md:py-11"
+        className="hidden border-y border-slate-200/80 bg-gradient-to-b from-slate-50/95 to-white py-9 md:py-11"
         data-testid="bergen-home-mirror-pickup"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -364,7 +364,7 @@ export default function BergenLaundry() {
         </div>
       </motion.section>
 
-      <section ref={heroImgSectionRef} className="container-pad pb-8">
+      <section ref={heroImgSectionRef} className="hidden container-pad pb-8">
         <div className="rounded-3xl overflow-hidden border border-slate-200 max-w-4xl">
           <img
             ref={heroImgRef}
@@ -375,7 +375,7 @@ export default function BergenLaundry() {
         </div>
       </section>
 
-      <section className="section bg-slate-50" id="pricing" data-reveal>
+      <section className="hidden section bg-slate-50" id="pricing" data-reveal>
         <div className="container-pad max-w-3xl">
           <h2 className="h2">Pricing</h2>
           <span
@@ -416,7 +416,6 @@ export default function BergenLaundry() {
             <a
               href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
               className="text-blue-800 font-medium underline underline-offset-2"
-              download
             >
               Terms of Service
             </a>
@@ -424,7 +423,7 @@ export default function BergenLaundry() {
         </div>
       </section>
 
-      <section className="section container-pad max-w-3xl" id="special-items" data-reveal>
+      <section className="hidden section container-pad max-w-3xl" id="special-items" data-reveal>
         <h2 className="h2">Special items</h2>
         <p className="mt-3 text-slate-600">
           Note oversized or delicate pieces in your pickup request — we&apos;ll
@@ -447,7 +446,7 @@ export default function BergenLaundry() {
         </ul>
       </section>
 
-      <section className="section bg-slate-50" id="terms" data-reveal>
+      <section className="hidden section bg-slate-50" id="terms" data-reveal>
         <div className="container-pad max-w-3xl">
           <h2 className="h2">Terms of service</h2>
           <div className="mt-4 text-slate-600 space-y-3 text-sm leading-relaxed">
@@ -463,7 +462,7 @@ export default function BergenLaundry() {
         </div>
       </section>
 
-      <section className="section container-pad max-w-3xl" id="app" data-reveal>
+      <section className="hidden section container-pad max-w-3xl" id="app" data-reveal>
         <h2 className="h2">Bergen Laundry Service app</h2>
         <p className="mt-4 text-slate-600">
           The mobile app does the same job as the{" "}
@@ -514,7 +513,7 @@ export default function BergenLaundry() {
         )}
       </section>
 
-      <section className="container-pad py-6 text-center text-sm text-slate-500 border-t border-slate-200/80">
+      <section className="hidden container-pad py-6 text-center text-sm text-slate-500 border-t border-slate-200/80">
         <p className="mb-3">
           <span>*4% credit card fee per order / *min order: 15 lbs / </span>
           <button
@@ -528,7 +527,6 @@ export default function BergenLaundry() {
           <a
             href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
             className="text-blue-800 font-medium underline underline-offset-2"
-            download
           >
             Terms of Service
           </a>
@@ -546,7 +544,7 @@ export default function BergenLaundry() {
         </Link>
       </section>
 
-      <section className="bg-blue-800 text-white" data-reveal-scale>
+      <section className="hidden bg-blue-800 text-white" data-reveal-scale>
         <div className="container-pad py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="font-display text-xl text-white">Ready to book?</p>
           <a

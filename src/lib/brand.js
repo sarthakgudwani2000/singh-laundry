@@ -111,6 +111,9 @@ function publicAsset(pathFromPublicDir) {
 const img = (file) => publicAsset(`images/site/${encodeSiteFileName(file)}`);
 
 const homePagePromo = img("Home Page.png");
+const homeSlide1 = img("Home (Slideshow 1).png");
+const homeSlide2 = img("Home (Slideshow 2).png");
+const homeSlide3 = img("Home (Slideshow 3).png");
 const washFoldHome = img("wash-dry-fold-home-page.jpg");
 const renovatedHome = img("Fully Renovated  November 2025 (Home Page).jpg");
 const newBridgeHome = img("New Bridge Laundromat (Home Page).jpg");
@@ -120,10 +123,11 @@ const washFoldServices2 = img("wash-dry-fold-service-2-services-page.png");
 const logoSingh = img("sl-shirt-logo-1aa-w314-o.png");
 const logoBergen = img("Bergen-Laundry-Logo.png");
 const logoNewBridge = img("New Bridge Laundromat logo.png");
-const newBridgePhoto1 = img("New Bridge Laundromat1.jpg");
-const newBridgePhoto2 = img("New Bridge Laundromat2.jpg");
-const newBridgePhoto3 = img("New Bridge Laundromat3.jpg");
-const newBridgePhoto4 = img("New Bridge Laundromat4.jpg");
+const newBridgePhoto1 = img("New Bridge Laundromat (Slideshow 1).jpg");
+const newBridgePhoto2 = img("New Bridge Laundromat (Slideshow 2).jpg");
+const newBridgePhoto3 = img("New Bridge Laundromat (Slideshow 3).jpg");
+const newBridgePhoto4 = img("New Bridge Laundromat (Slideshow 4).jpg");
+const newBridgePhoto5 = img("New Bridge Laundromat (Slideshow 5).jpg");
 const aboutPhoto = img("home-page-image-1c-w1685-o.jpg");
 const commercialDryers = img("laundromat-dryers.png");
 const operationBags = img("laundry-operation-bags.png");
@@ -140,6 +144,9 @@ export const IMAGES = {
   logoNewBridge,
 
   homePromoVan: homePagePromo,
+  homeSlide1,
+  homeSlide2,
+  homeSlide3,
   homeCardLaundromat: newBridgeHome,
   homeCardRenovated: renovatedHome,
   homeCardWashFold: washFoldHome,
@@ -158,8 +165,10 @@ export const IMAGES = {
   newBridgeCarousel1: newBridgePhoto1,
   newBridgeCarousel2: newBridgePhoto2,
   newBridgeCarousel3: newBridgePhoto3,
+  newBridgeCarousel4: newBridgePhoto4,
+  newBridgeCarousel5: newBridgePhoto5,
   newBridgeWashFoldLeft: washFoldHome,
-  newBridgeWashFoldRight: newBridgePhoto4,
+  newBridgeWashFoldRight: img("New Bridge Laundromat4.jpg"),
 
   aboutBanner: aboutPhoto,
   contactSideA: homePagePromo,

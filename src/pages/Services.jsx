@@ -54,9 +54,9 @@ export default function Services() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
-      <section className="page-hero-section" data-reveal-blur>
+      <section className="page-hero-section max-w-none" data-reveal-blur>
         <p className="overline mb-3 hidden">Services</p>
-        <h1 className="h1 lg:whitespace-nowrap">Our Laundry Care Services</h1>
+        <h1 className="h1 whitespace-nowrap">Our Laundry Care Services</h1>
         <span
           className="mt-4 mx-auto block h-1.5 w-28 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-500"
           data-reveal-line
@@ -80,7 +80,10 @@ export default function Services() {
         <div className="container-pad max-w-6xl mx-auto">
           <div className="text-center" data-reveal>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
-              <Link to="/bergen-laundry-service" className="hover:text-blue-800 transition-colors">
+              <Link
+                to="/bergen-laundry-service"
+                className="inline-block underline decoration-blue-300 decoration-2 underline-offset-4 transition-all duration-300 hover:-translate-y-1 hover:text-blue-800 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-4"
+              >
                 {copy.pickup.title}
               </Link>
             </h2>
@@ -89,17 +92,22 @@ export default function Services() {
               data-reveal-line
               aria-hidden
             />
+            <p className="mt-4 max-w-3xl mx-auto text-center font-display text-base md:text-xl font-semibold text-slate-700">
+              {copy.pickup.intro}
+            </p>
           </div>
-          <motion.div className="mt-6 surface-card overflow-hidden" data-reveal-scale>
-            <div className="grid lg:grid-cols-3 gap-0 items-stretch">
-              <p className="lg:col-span-3 px-8 pt-8 md:px-10 text-center text-slate-700 leading-relaxed">
+          <motion.div className="mt-6" data-reveal-scale>
+            <div className="grid lg:grid-cols-3 gap-6 items-stretch">
+              <p className="hidden lg:col-span-3 px-8 pt-8 md:px-10 text-center text-slate-700 leading-relaxed">
                 {copy.pickup.intro}
               </p>
-              <div className="lg:col-span-3 grid sm:grid-cols-3 gap-4 px-8 pt-6 md:px-10" data-reveal-stagger>
+              <div className="lg:col-span-3 grid md:grid-cols-3 gap-6" data-reveal-stagger>
                 {copy.pickup.benefits.map((b) => (
-                  <div key={b.title} className="surface-card p-5 text-center" data-reveal>
-                    <p className="text-xs font-semibold uppercase text-slate-500">{b.title}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-700">{b.text}</p>
+                  <div key={b.title} className="surface-card overflow-hidden flex flex-col" data-reveal>
+                    <div className="p-6 flex-1">
+                      <p className="font-display font-bold text-lg text-slate-900">{b.title}</p>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-700">{b.text}</p>
+                    </div>
                   </div>
                 ))}
               </div>

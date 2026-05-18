@@ -14,12 +14,12 @@ const links = [
   { to: "/", label: "Home", short: "Home" },
   { to: "/services", label: "Services", short: "Services" },
   { to: "/bergen-laundry-service", label: BRAND.pickup, short: "Bergen" },
-  { to: "/about", label: "About Us", short: "About" },
   {
     to: "/new-bridge-laundromat",
     label: "New Bridge Laundromat",
     short: "New Bridge",
   },
+  { to: "/about", label: "About Us", short: "About" },
   { to: "/contact", label: "Contact Us", short: "Contact" },
 ];
 
@@ -225,7 +225,9 @@ export default function Navbar() {
                       end={l.to === "/"}
                       className={({ isActive }) =>
                         [
-                          "relative block whitespace-nowrap rounded-lg px-2.5 py-2 text-xs font-medium tracking-tight transition-colors lg:text-[0.9375rem] xl:text-base xl:px-3",
+                          `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-xs xl:text-sm 2xl:text-[0.9375rem] xl:px-2 2xl:px-2.5 ${
+                            l.to === "/" ? "lg:ml-4 lg:pl-4 xl:ml-5 xl:pl-5" : ""
+                          } ${l.to === "/contact" ? "lg:mr-4 lg:pr-4 xl:mr-5 xl:pr-5" : ""}`,
                           isActive
                             ? "text-blue-900"
                             : "text-blue-600 hover:bg-blue-50/90 hover:text-blue-800",
@@ -235,7 +237,23 @@ export default function Navbar() {
                     >
                       {({ isActive }) => (
                         <>
-                          <span className="hidden 2xl:inline">{l.label}</span>
+                          <span className="hidden text-center leading-tight 2xl:inline-block">
+                            {l.to === "/bergen-laundry-service" ? (
+                              <>
+                                Bergen Laundry
+                                <br />
+                                Service
+                              </>
+                            ) : l.to === "/new-bridge-laundromat" ? (
+                              <>
+                                New Bridge
+                                <br />
+                                Laundromat
+                              </>
+                            ) : (
+                              l.label
+                            )}
+                          </span>
                           <span className="2xl:hidden">{l.short}</span>
                           {isActive ? (
                             <motion.span

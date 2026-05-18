@@ -24,11 +24,11 @@ import { BRAND, PRICING, LOCATIONS, HOURS, IMAGES, SCHEDULE_ORDER_URL } from "@/
 import { NEW_BRIDGE_AMENITIES } from "@/lib/templateCopy";
 
 const carouselSlides = [
-  { src: IMAGES.newBridgeCarousel1, alt: "New Bridge Laundromat — commercial dryers" },
-  { src: IMAGES.newBridgeCarousel2, alt: "Wash, dry & fold — staff finishing orders" },
-  { src: IMAGES.newBridgeCarousel3, alt: "Bergen Laundry Service delivery van" },
-  { src: IMAGES.newBridgeWashFoldLeft, alt: "Wash, dry & fold service — folded laundry" },
-  { src: IMAGES.newBridgeWashFoldRight, alt: "Clothing on hangers and rails — finishing and pickup" },
+  { src: IMAGES.newBridgeCarousel1, alt: "New Bridge Laundromat slideshow photo 1" },
+  { src: IMAGES.newBridgeCarousel2, alt: "New Bridge Laundromat slideshow photo 2" },
+  { src: IMAGES.newBridgeCarousel3, alt: "New Bridge Laundromat slideshow photo 3" },
+  { src: IMAGES.newBridgeCarousel4, alt: "New Bridge Laundromat slideshow photo 4" },
+  { src: IMAGES.newBridgeCarousel5, alt: "New Bridge Laundromat slideshow photo 5" },
 ];
 
 const amenityIcons = [Wifi, Armchair, Tv, LayoutGrid, ShoppingBag, ShieldCheck];
@@ -113,7 +113,7 @@ export default function NewBridge() {
         <div className="mt-8 text-center" data-reveal>
           <h2 className="h2">Wash, Dry &amp; Fold Service</h2>
           <p className="mt-3 text-base md:text-xl font-semibold text-slate-900">
-            {PRICING.newBridgeWashFoldLb}/lb Â· Next day pickup on most orders
+            {PRICING.newBridgeWashFoldLb}/lb {"·"} Next day pickup on most orders
           </p>
           <span
             className="mt-3 mx-auto block h-1 w-24 rounded-full bg-gradient-to-r from-sky-500 to-blue-700"
@@ -122,7 +122,7 @@ export default function NewBridge() {
           />
           <p className="mt-5 text-slate-700 leading-relaxed text-sm md:text-base max-w-3xl mx-auto">
             Tired of laundry day? Let us handle it! Simply drop off your dirty clothes, and
-            we&apos;ll take care of the rest. We wash, dry, and fold â€” then bundle everything for
+            we&apos;ll take care of the rest. We wash, dry, and fold — then bundle everything for
             easy pickup.
           </p>
           <ul className="mt-6 space-y-3 text-left text-sm text-slate-800 max-w-md mx-auto">
@@ -319,7 +319,7 @@ export default function NewBridge() {
               </span>
             </li>
           </ul>
-          <div className="mt-8 text-center">
+          <div className="mt-8 hidden text-center">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900">
               Service pricing
             </h2>
@@ -327,7 +327,7 @@ export default function NewBridge() {
               Current drop-off and dryer pricing.
             </p>
           </div>
-          <div className="mt-4 rounded-2xl border border-slate-200 bg-white overflow-hidden max-w-3xl mx-auto">
+          <div className="mt-4 hidden rounded-2xl border border-slate-200 bg-white overflow-hidden max-w-3xl mx-auto">
             <table className="w-full text-sm">
               <thead className="bg-slate-100 text-left">
                 <tr>

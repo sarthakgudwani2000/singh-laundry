@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "D-DIN Bold";
+  src: url("/fonts/D-DIN-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Lock light UI so OS dark mode cannot wash out text/background */
 html {
   color-scheme: only light;
@@ -150,7 +158,13 @@ h6,
     @apply border-b border-white/50 bg-white/70 backdrop-blur-2xl shadow-sm shadow-slate-900/5;
   }
   .site-header {
-    font-family: "D-DIN", "DIN Alternate", "Arial Narrow", "Outfit", "Manrope", sans-serif;
+    font-family: "D-DIN Bold", "D-DIN", "DIN Alternate", "Arial Narrow", "Roboto Condensed", "Outfit", "Manrope", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  .site-header .font-display {
+    font-family: inherit;
+    letter-spacing: 0;
   }
   .card-hover {
     @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/10;

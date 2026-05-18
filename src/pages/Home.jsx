@@ -1,5 +1,5 @@
 import { useState, useRef, useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import {
   motion,
   useMotionTemplate,
@@ -13,49 +13,48 @@ import {
   useGsapFloatAccents,
   useGsapScrollReveal,
 } from "@/hooks/useGsapPageAnimations";
-import {
-  ArrowRight,
-  Clock,
-  ChevronLeft,
-  ChevronRight,
-  MapPin,
-  Phone,
-  RefreshCw,
-  Truck,
-} from "lucide-react";
-import SpecialItemsDialog from "@/components/SpecialItemsDialog";
-import {
-  BRAND,
-  PRICING,
-  LOCATIONS,
-  HOURS,
-  IMAGES,
-  SCHEDULE_ORDER_URL,
-} from "@/lib/brand";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+// import {
+//   ArrowRight,
+//   Clock,
+//   MapPin,
+//   Phone,
+//   RefreshCw,
+//   Truck,
+// } from "lucide-react";
+// import SpecialItemsDialog from "@/components/SpecialItemsDialog";
+import { IMAGES } from "@/lib/brand";
+// import {
+//   BRAND,
+//   PRICING,
+//   LOCATIONS,
+//   HOURS,
+//   SCHEDULE_ORDER_URL,
+// } from "@/lib/brand";
 
 const homeSlides = [
   {
-    src: IMAGES.servicesPickup,
+    src: IMAGES.homeSlide1,
     alt: "Bergen Laundry Service pickup and delivery",
-    title: "Pickup & delivery",
-    detail: "Bergen Laundry Service brings fresh folded laundry back to your door.",
+    // title: "Pickup & delivery",
+    // detail: "Bergen Laundry Service brings fresh folded laundry back to your door.",
   },
   {
-    src: IMAGES.servicesWashFold,
+    src: IMAGES.homeSlide2,
     alt: "Wash, dry, and fold service",
-    title: "Wash, dry & fold",
-    detail: "Drop-off laundry care handled at New Bridge Laundromat.",
+    // title: "Wash, dry & fold",
+    // detail: "Drop-off laundry care handled at New Bridge Laundromat.",
   },
   {
-    src: IMAGES.servicesSelfServe,
+    src: IMAGES.homeSlide3,
     alt: "In-store laundry service",
-    title: "In-store laundry",
-    detail: "Self-service machines, laundry cards, seating, and folding space.",
+    // title: "In-store laundry",
+    // detail: "Self-service machines, laundry cards, seating, and folding space.",
   },
 ];
 
 export default function Home() {
-  const [specialOpen, setSpecialOpen] = useState(false);
+  // const [specialOpen, setSpecialOpen] = useState(false);
   const [homeSlide, setHomeSlide] = useState(0);
   const reduceMotionPref = useReducedMotion();
   const reduceMotion = reduceMotionPref === true;
@@ -126,28 +125,27 @@ export default function Home() {
     my.set(0.35);
   };
 
-  const heroHighlights = [
-    {
-      icon: Truck,
-      title: `${PRICING.bergenWashFoldLb}/lb wash & fold`,
-      detail: `${PRICING.minOrderLbs} lb minimum · ${PRICING.pickupDeliveryFree}`,
-    },
-    {
-      icon: Clock,
-      title: "Next-day returns",
-      detail: PRICING.nextDayNote,
-    },
-    {
-      icon: RefreshCw,
-      title: "Recurring & volume",
-      detail: "Automatic orders · volume discounts",
-    },
-  ];
+  // const heroHighlights = [
+  //   {
+  //     icon: Truck,
+  //     title: `${PRICING.bergenWashFoldLb}/lb wash & fold`,
+  //     detail: `${PRICING.minOrderLbs} lb minimum · ${PRICING.pickupDeliveryFree}`,
+  //   },
+  //   {
+  //     icon: Clock,
+  //     title: "Next-day returns",
+  //     detail: PRICING.nextDayNote,
+  //   },
+  //   {
+  //     icon: RefreshCw,
+  //     title: "Recurring & volume",
+  //     detail: "Automatic orders · volume discounts",
+  //   },
+  // ];
 
   return (
     <div ref={homeRootRef} data-testid="home-page">
-      <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} />
-      {/* Hero + parent clarity */}
+      {/* <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} /> */}
       <section
         ref={heroRef}
         className="container-pad pt-5 md:pt-7 pb-8 md:pb-10"
@@ -160,230 +158,241 @@ export default function Home() {
           onPointerMove={onHeroPointer}
           onPointerLeave={onHeroPointerLeave}
         >
-        {!reduceMotion ? (
-          <motion.div
-            className="pointer-events-none absolute inset-0 z-[1] mix-blend-multiply opacity-90"
-            style={{ background: spotlight }}
-            aria-hidden
-          />
-        ) : null}
-        <div
-          ref={heroOrb1Ref}
-          className="hidden pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-sky-300/30 blur-3xl z-0 will-change-transform"
-          aria-hidden
-        />
-        <div
-          ref={heroOrb2Ref}
-          className="hidden pointer-events-none absolute -left-20 bottom-0 h-48 w-48 rounded-full bg-blue-200/25 blur-3xl z-0 will-change-transform"
-          aria-hidden
-        />
-        <motion.div
-          className="relative z-[2] grid lg:grid-cols-2 gap-7 lg:gap-10 xl:gap-12 items-center"
-          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="min-w-0 lg:col-span-2">
-            <motion.div className="hidden flex-wrap items-center gap-x-3 gap-y-1">
-              <p className="overline mb-0">Singh Laundry</p>
-              <span className="hidden sm:inline text-slate-300" aria-hidden>
-                ·
-              </span>
-              <p className="text-sm font-medium text-slate-600">
-                Trust Us With Your Threads
-              </p>
-            </motion.div>
-
-            <h1 className="mt-1 max-w-5xl mx-auto text-center font-display font-bold leading-tight text-slate-950">
-              <span className="block text-3xl sm:text-4xl lg:text-5xl">
-                Welcome to Singh Laundry,
-              </span>
-              <span className="mt-2 block text-2xl sm:text-3xl lg:text-4xl text-blue-950">
-                the home of Bergen Laundry Serrvice &amp; New Bridge Laundromat in Bergenfield, NJ
-              </span>
-            </h1>
-            <h2 className="mt-4 max-w-3xl mx-auto text-center font-display text-lg md:text-2xl font-semibold text-slate-700">
-              North Jersey&apos;s best free laundry pickup &amp; delivery service
-            </h2>
-            <span
-              className="mt-4 mx-auto block h-1.5 w-32 rounded-full bg-gradient-to-r from-blue-700 via-sky-500 to-indigo-500"
+          {!reduceMotion ? (
+            <motion.div
+              className="pointer-events-none absolute inset-0 z-[1] mix-blend-multiply opacity-90"
+              style={{ background: spotlight }}
               aria-hidden
             />
+          ) : null}
+          <div
+            ref={heroOrb1Ref}
+            className="hidden pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-sky-300/30 blur-3xl z-0 will-change-transform"
+            aria-hidden
+          />
+          <div
+            ref={heroOrb2Ref}
+            className="hidden pointer-events-none absolute -left-20 bottom-0 h-48 w-48 rounded-full bg-blue-200/25 blur-3xl z-0 will-change-transform"
+            aria-hidden
+          />
+          <motion.div
+            className="relative z-[2] grid lg:grid-cols-2 gap-7 lg:gap-10 xl:gap-12 items-center"
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="min-w-0 lg:col-span-2">
+              {/*
+              <motion.div className="hidden flex-wrap items-center gap-x-3 gap-y-1">
+                <p className="overline mb-0">Singh Laundry</p>
+                <span className="hidden sm:inline text-slate-300" aria-hidden>
+                  ·
+                </span>
+                <p className="text-sm font-medium text-slate-600">
+                  Trust Us With Your Threads
+                </p>
+              </motion.div>
+              */}
 
-            <div className="mt-7 relative mx-auto max-w-5xl rounded-[1.75rem] overflow-hidden border border-slate-200 bg-slate-950 shadow-2xl shadow-slate-900/20 ring-1 ring-white/80 group card-hover">
-              <img
-                src={homeSlides[homeSlide].src}
-                alt={homeSlides[homeSlide].alt}
-                className="w-full h-60 md:h-[28rem] object-cover transition-opacity duration-300"
+              <h1 className="mt-1 max-w-5xl mx-auto text-center font-display font-bold leading-tight text-slate-950">
+                <span className="block text-3xl sm:text-4xl lg:text-5xl">
+                  Welcome to Singh Laundry,
+                </span>
+                <span className="mt-2 block text-2xl sm:text-3xl lg:text-4xl text-blue-950">
+                  the home of Bergen Laundry Serrvice &amp; New Bridge Laundromat in Bergenfield, NJ
+                </span>
+              </h1>
+              <h2 className="mt-4 max-w-3xl mx-auto text-center font-display text-lg md:text-2xl font-semibold text-slate-700">
+                North Jersey&apos;s best free laundry pickup &amp; delivery service
+              </h2>
+              <span
+                className="mt-4 mx-auto block h-1.5 w-32 rounded-full bg-gradient-to-r from-blue-700 via-sky-500 to-indigo-500"
+                aria-hidden
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent md:block" aria-hidden />
-              <div className="absolute bottom-4 left-4 right-4 hidden flex-col gap-3 md:left-6 md:right-6 md:flex md:flex-row md:items-end md:justify-between">
-                <div className="max-w-xl text-white">
-                  <p className="font-display text-2xl md:text-3xl font-bold leading-tight">
+
+              <div className="mt-7 relative mx-auto max-w-5xl rounded-[1.75rem] overflow-hidden border border-slate-200 bg-slate-950 shadow-2xl shadow-slate-900/20 ring-1 ring-white/80 group card-hover">
+                <img
+                  src={homeSlides[homeSlide].src}
+                  alt={homeSlides[homeSlide].alt}
+                  className="w-full h-60 md:h-[28rem] object-contain transition-opacity duration-300"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent md:block" aria-hidden />
+                {/*
+                <div className="absolute bottom-4 left-4 right-4 hidden flex-col gap-3 md:left-6 md:right-6 md:hidden md:flex-row md:items-end md:justify-between">
+                  <div className="max-w-xl text-white">
+                    <p className="font-display text-2xl md:text-3xl font-bold leading-tight">
+                      {homeSlides[homeSlide].title}
+                    </p>
+                    <p className="mt-1 text-sm md:text-base text-white/85 leading-relaxed">
+                      {homeSlides[homeSlide].detail}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2 text-xs font-semibold text-white">
+                    {homeSlides.map((item, i) => (
+                      <button
+                        key={item.title}
+                        type="button"
+                        onClick={() => setHomeSlide(i)}
+                        className={`rounded-full px-3 py-1.5 backdrop-blur-sm transition-colors ${
+                          i === homeSlide
+                            ? "bg-white text-blue-900"
+                            : "bg-white/20 text-white hover:bg-white/30"
+                        }`}
+                      >
+                        {item.title}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                */}
+                <div className="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none">
+                  <button
+                    type="button"
+                    onClick={prevHomeSlide}
+                    className="pointer-events-auto h-11 w-11 rounded-full bg-white/95 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
+                    aria-label="Previous photo"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextHomeSlide}
+                    className="pointer-events-auto h-11 w-11 rounded-full bg-white/95 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
+                    aria-label="Next photo"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </button>
+                </div>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 rounded-full bg-slate-950/35 px-2.5 py-2 backdrop-blur-sm">
+                  {homeSlides.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setHomeSlide(i)}
+                      className={`h-2 w-2 rounded-full transition-colors ${
+                        i === homeSlide ? "bg-white" : "bg-white/50"
+                      }`}
+                      aria-label={`Show slide ${i + 1}`}
+                    />
+                  ))}
+                </div>
+                {/*
+                <div className="hidden p-4 text-white md:hidden">
+                  <p className="font-display text-xl font-bold leading-tight">
                     {homeSlides[homeSlide].title}
                   </p>
-                  <p className="mt-1 text-sm md:text-base text-white/85 leading-relaxed">
+                  <p className="mt-1 text-sm text-white/85 leading-relaxed">
                     {homeSlides[homeSlide].detail}
                   </p>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
+                    {homeSlides.map((item, i) => (
+                      <button
+                        key={item.title}
+                        type="button"
+                        onClick={() => setHomeSlide(i)}
+                        className={`rounded-full px-3 py-1.5 transition-colors ${
+                          i === homeSlide
+                            ? "bg-white text-blue-900"
+                            : "bg-white/15 text-white hover:bg-white/25"
+                        }`}
+                      >
+                        {item.title}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2 text-xs font-semibold text-white">
-                  {homeSlides.map((item, i) => (
-                    <button
-                      key={item.title}
-                      type="button"
-                      onClick={() => setHomeSlide(i)}
-                      className={`rounded-full px-3 py-1.5 backdrop-blur-sm transition-colors ${
-                        i === homeSlide
-                          ? "bg-white text-blue-900"
-                          : "bg-white/20 text-white hover:bg-white/30"
-                      }`}
-                    >
-                      {item.title}
-                    </button>
-                  ))}
-                </div>
+                */}
               </div>
-              <div className="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none">
-                <button
-                  type="button"
-                  onClick={prevHomeSlide}
-                  className="pointer-events-auto h-11 w-11 rounded-full bg-white/95 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
-                  aria-label="Previous photo"
-                >
-                  <ChevronLeft className="h-6 w-6" />
-                </button>
-                <button
-                  type="button"
-                  onClick={nextHomeSlide}
-                  className="pointer-events-auto h-11 w-11 rounded-full bg-white/95 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
-                  aria-label="Next photo"
-                >
-                  <ChevronRight className="h-6 w-6" />
-                </button>
-              </div>
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-1.5 rounded-full bg-slate-950/35 px-2.5 py-2 backdrop-blur-sm">
-                {homeSlides.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => setHomeSlide(i)}
-                    className={`h-2 w-2 rounded-full transition-colors ${
-                      i === homeSlide ? "bg-white" : "bg-white/50"
-                    }`}
-                    aria-label={`Show slide ${i + 1}`}
-                  />
-                ))}
-              </div>
-              <div className="p-4 text-white md:hidden">
-                <p className="font-display text-xl font-bold leading-tight">
-                  {homeSlides[homeSlide].title}
-                </p>
-                <p className="mt-1 text-sm text-white/85 leading-relaxed">
-                  {homeSlides[homeSlide].detail}
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
-                  {homeSlides.map((item, i) => (
-                    <button
-                      key={item.title}
-                      type="button"
-                      onClick={() => setHomeSlide(i)}
-                      className={`rounded-full px-3 py-1.5 transition-colors ${
-                        i === homeSlide
-                          ? "bg-white text-blue-900"
-                          : "bg-white/15 text-white hover:bg-white/25"
-                      }`}
-                    >
-                      {item.title}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
 
-            <p className="hidden mt-4 text-base md:text-lg text-slate-600 max-w-xl leading-relaxed">
-              <span className="font-display font-semibold text-slate-800">
-                New Jersey&apos;s finest laundromats
-              </span>
-              {" "}
+              {/*
+              Previous Home page content below the slideshow is intentionally commented out.
+              Restore the related imports from react-router-dom, lucide-react, SpecialItemsDialog,
+              and brand.js before uncommenting any of these sections.
+
+              <p className="hidden mt-4 text-base md:text-lg text-slate-600 max-w-xl leading-relaxed">
+                <span className="font-display font-semibold text-slate-800">
+                  New Jersey&apos;s finest laundromats
+                </span>
+                {" "}
               — &quot;Clean Clothes, Happy Life.&quot;{" "}
-              <strong>{BRAND.pickup}</strong> &amp; <strong>{BRAND.store}</strong>{" "}
-              under <strong>{BRAND.parent}</strong>.
-            </p>
+                <strong>{BRAND.pickup}</strong> &amp; <strong>{BRAND.store}</strong>{" "}
+                under <strong>{BRAND.parent}</strong>.
+              </p>
 
-            <ul className="hidden mt-6 sm:grid-cols-2 gap-3" aria-label="Service highlights">
-              {heroHighlights.map(({ icon: Icon, title, detail }) => (
-                <li
-                  key={title}
-                  className="flex gap-3 rounded-2xl border border-slate-200/90 bg-white/80 px-4 py-3 shadow-sm"
+              <ul className="hidden mt-6 sm:grid-cols-2 gap-3" aria-label="Service highlights">
+                {heroHighlights.map(({ icon: Icon, title, detail }) => (
+                  <li
+                    key={title}
+                    className="flex gap-3 rounded-2xl border border-slate-200/90 bg-white/80 px-4 py-3 shadow-sm"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+                      <Icon className="h-4 w-4" aria-hidden />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-semibold text-slate-900 leading-snug">
+                        {title}
+                      </span>
+                      <span className="mt-0.5 block text-xs text-slate-600 leading-relaxed">
+                        {detail}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="hidden mt-4 text-sm text-slate-600 max-w-xl">
+                Pickup orders are washed, dried, and folded at our Bergenfield
+                location.{" "}
+                <Link
+                  to="/services#pickup-delivery"
+                  className="font-medium text-blue-800 hover:underline"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
-                    <Icon className="h-4 w-4" aria-hidden />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-sm font-semibold text-slate-900 leading-snug">
-                      {title}
-                    </span>
-                    <span className="mt-0.5 block text-xs text-slate-600 leading-relaxed">
-                      {detail}
-                    </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
+                  Service details
+                </Link>
+              </p>
 
-            <p className="hidden mt-4 text-sm text-slate-600 max-w-xl">
-              Pickup orders are washed, dried, and folded at our Bergenfield
-              location.{" "}
-              <Link
-                to="/services#pickup-delivery"
-                className="font-medium text-blue-800 hover:underline"
-              >
-                Service details
-              </Link>
-            </p>
+              <motion.div className="hidden mt-7 flex-col sm:flex-row flex-wrap gap-3">
+                <motion.a
+                  href={SCHEDULE_ORDER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary justify-center"
+                  data-testid="hero-cta-schedule"
+                  whileHover={reduceMotion ? {} : { scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Schedule a pickup <ArrowRight className="h-4 w-4" />
+                </motion.a>
+                <Link
+                  to="/new-bridge-laundromat"
+                  className="btn-secondary justify-center"
+                >
+                  New Bridge Laundromat
+                </Link>
+                <Link
+                  to="/bergen-laundry-service"
+                  className="btn-secondary justify-center"
+                >
+                  {BRAND.pickup}
+                </Link>
+              </motion.div>
 
-            <motion.div className="hidden mt-7 flex-col sm:flex-row flex-wrap gap-3">
-              <motion.a
-                href={SCHEDULE_ORDER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary justify-center"
-                data-testid="hero-cta-schedule"
-                whileHover={reduceMotion ? {} : { scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Schedule a pickup <ArrowRight className="h-4 w-4" />
-              </motion.a>
-              <Link
-                to="/new-bridge-laundromat"
-                className="btn-secondary justify-center"
-              >
-                New Bridge Laundromat
-              </Link>
-              <Link
-                to="/bergen-laundry-service"
-                className="btn-secondary justify-center"
-              >
-                {BRAND.pickup}
-              </Link>
-            </motion.div>
-
-            <p className="hidden mt-5 flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
-              <a
-                href={`tel:${BRAND.phoneBergen}`}
-                className="inline-flex items-center gap-1.5 font-medium hover:text-slate-800"
-              >
-                <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                {BRAND.phoneBergen}
-              </a>
-              <a
-                href={`mailto:${BRAND.email}`}
-                className="hover:text-slate-800 break-all"
-              >
-                {BRAND.email}
-              </a>
-            </p>
-          </div>
+              <p className="hidden mt-5 flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
+                <a
+                  href={`tel:${BRAND.phoneBergen}`}
+                  className="inline-flex items-center gap-1.5 font-medium hover:text-slate-800"
+                >
+                  <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                  {BRAND.phoneBergen}
+                </a>
+                <a
+                  href={`mailto:${BRAND.email}`}
+                  className="hover:text-slate-800 break-all"
+                >
+                  {BRAND.email}
+                </a>
+              </p>
+            </div>
 
           <div className="hidden relative min-h-[220px] sm:min-h-[260px] lg:min-h-[340px] rounded-2xl overflow-hidden border border-slate-200/90 shadow-lg shadow-slate-900/10 ring-1 ring-white/70">
             <img
@@ -404,12 +413,14 @@ export default function Home() {
                 <span className="font-mono font-bold">{PRICING.firstOrderCode}</span>
               </p>
             </div>
-          </div>
-        </motion.div>
+              */}
+            </div>
+          </motion.div>
         </motion.div>
       </section>
 
       {/* Legacy template: seal + van + FIRST10 promo */}
+      {/*
       <section className="container-pad py-8 md:py-10">
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-6 items-center">
           <div className="flex justify-center lg:justify-start" data-reveal>
@@ -560,6 +571,7 @@ export default function Home() {
 
 
       {/* Contact */}
+      {/*
       <section
         className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white py-9 md:py-12 overflow-hidden ring-1 ring-white/10"
         id="contact"
@@ -650,6 +662,7 @@ export default function Home() {
           About &amp; service area
         </Link>
       </section>
+      */}
     </div>
   );
 }
