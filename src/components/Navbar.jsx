@@ -216,8 +216,8 @@ export default function Navbar() {
               </div>
             </Link>
 
-            <nav className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-              <ul className="flex items-center gap-0.5 xl:gap-1.5">
+            <nav className="hidden min-w-0 flex-1 items-center justify-center lg:mx-4 lg:flex xl:mx-10">
+              <ul className="flex items-center justify-center gap-2 xl:gap-4 2xl:gap-5">
                 {links.map((l) => (
                   <li key={l.to}>
                     <NavLink
@@ -225,9 +225,9 @@ export default function Navbar() {
                       end={l.to === "/"}
                       className={({ isActive }) =>
                         [
-                          `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-xs xl:text-sm 2xl:text-[0.9375rem] xl:px-2 2xl:px-2.5 ${
-                            l.to === "/" ? "lg:ml-4 lg:pl-4 xl:ml-5 xl:pl-5" : ""
-                          } ${l.to === "/contact" ? "lg:mr-4 lg:pr-4 xl:mr-5 xl:pr-5" : ""}`,
+                          `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-xs xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] ${
+                            l.to === "/" ? "lg:ml-3 lg:pl-3 xl:ml-5 xl:pl-5" : ""
+                          } ${l.to === "/contact" ? "lg:mr-3 lg:pr-3 xl:mr-5 xl:pr-5" : ""}`,
                           isActive
                             ? "text-blue-900"
                             : "text-blue-600 hover:bg-blue-50/90 hover:text-blue-800",
@@ -237,7 +237,13 @@ export default function Navbar() {
                     >
                       {({ isActive }) => (
                         <>
-                          <span className="hidden text-center leading-tight 2xl:inline-block">
+                          <span
+                            className={`hidden text-center leading-tight 2xl:inline-block ${
+                              l.to === "/bergen-laundry-service" || l.to === "/new-bridge-laundromat"
+                                ? "lg:inline-block"
+                                : ""
+                            }`}
+                          >
                             {l.to === "/bergen-laundry-service" ? (
                               <>
                                 Bergen Laundry
@@ -254,7 +260,15 @@ export default function Navbar() {
                               l.label
                             )}
                           </span>
-                          <span className="2xl:hidden">{l.short}</span>
+                          <span
+                            className={`2xl:hidden ${
+                              l.to === "/bergen-laundry-service" || l.to === "/new-bridge-laundromat"
+                                ? "lg:hidden"
+                                : ""
+                            }`}
+                          >
+                            {l.short}
+                          </span>
                           {isActive ? (
                             <motion.span
                               layoutId="nav-underline"
@@ -270,8 +284,8 @@ export default function Navbar() {
               </ul>
             </nav>
 
-            <div className="hidden shrink-0 items-center gap-4 lg:flex">
-              <div className="flex flex-col items-center text-center text-xs lg:text-base">
+            <div className="hidden shrink-0 items-center gap-3 lg:flex xl:gap-4">
+              <div className="flex flex-col items-center text-center text-xs xl:text-base">
                 <a
                   href={`tel:${BRAND.phoneBergen}`}
                   className="font-semibold tabular-nums text-blue-600 transition hover:text-blue-800"
@@ -280,7 +294,7 @@ export default function Navbar() {
                 </a>
                 <a
                   href={`mailto:${BRAND.email}`}
-                  className="max-w-[10.5rem] truncate text-[11px] text-blue-600/90 transition hover:text-blue-800 lg:text-sm"
+                  className="max-w-[8.5rem] truncate text-[11px] text-blue-600/90 transition hover:text-blue-800 xl:max-w-[10.5rem] xl:text-sm"
                 >
                   {BRAND.email}
                 </a>
@@ -289,7 +303,7 @@ export default function Navbar() {
                 href={SCHEDULE_ORDER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-blue-400 via-blue-500 to-blue-700 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/35 ring-1 ring-white/20 transition hover:from-blue-300 hover:via-blue-500 hover:to-blue-600 hover:shadow-lg lg:text-base"
+                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-blue-400 via-blue-500 to-blue-700 px-3 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/35 ring-1 ring-white/20 transition hover:from-blue-300 hover:via-blue-500 hover:to-blue-600 hover:shadow-lg xl:px-4 xl:text-base"
                 data-testid="navbar-cta-schedule"
               >
                 Schuedule a Pickup
