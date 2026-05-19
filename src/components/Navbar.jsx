@@ -24,10 +24,13 @@ const links = [
 ];
 
 const BERGEN_PICKUP_PATH = "/bergen-laundry-service";
+const NEW_BRIDGE_PATH = "/new-bridge-laundromat";
 
 export default function Navbar() {
   const { pathname } = useLocation();
   const isBergenPickupPage = pathname === BERGEN_PICKUP_PATH;
+  const isNewBridgePage = pathname === NEW_BRIDGE_PATH;
+  const isCompactHeader = isBergenPickupPage || isNewBridgePage;
   const [open, setOpen] = useState(false);
   const [elevated, setElevated] = useState(false);
   const { scrollY } = useScroll();
@@ -177,17 +180,19 @@ export default function Navbar() {
           <div className="flex h-[4.25rem] md:h-[4.5rem] items-center justify-between gap-4 lg:gap-8">
             <Link
               to="/"
-              className="group flex min-w-0 items-center gap-3"
+              className={`group flex min-w-0 items-center ${isCompactHeader ? "gap-2" : "gap-3"}`}
               data-testid="brand-link"
               aria-label={
                 isBergenPickupPage
                   ? `${BRAND.pickup} — ${BRAND.parent} home`
-                  : `${BRAND.parent} home`
+                  : `${BRAND.store} — ${BRAND.parent} home`
               }
             >
               <div
-                className={`logo-surface relative flex shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-[1.03] group-hover:shadow-lg overflow-hidden p-1.5 ${
-                  isBergenPickupPage ? "h-11 w-11" : "h-[4.5rem] w-[4.5rem]"
+                className={`relative flex shrink-0 items-center justify-center transition-transform duration-300 group-hover:scale-[1.03] overflow-hidden p-1.5 ${
+                  isNewBridgePage
+                    ? "h-12 w-28"
+                    : "h-[4.5rem] w-[4.5rem]"
                 }`}
               >
                 {isBergenPickupPage ? (
@@ -195,6 +200,12 @@ export default function Navbar() {
                     src={IMAGES.logoBergen}
                     alt=""
                     className="h-full w-full object-contain"
+                  />
+                ) : isNewBridgePage ? (
+                  <img
+                    src={IMAGES.logoNewBridge}
+                    alt=""
+                    className="h-full w-auto max-w-none object-contain"
                   />
                 ) : (
                   <img
@@ -205,19 +216,41 @@ export default function Navbar() {
                 )}
               </div>
               <div className="min-w-0 leading-tight">
-                <span className="block whitespace-nowrap font-display text-[0.9375rem] font-bold tracking-tight text-blue-600 transition-colors group-hover:text-blue-700 md:text-base lg:text-xl">
-                  {isBergenPickupPage ? BRAND.pickup : BRAND.parent}
+                <span
+                  className={`block whitespace-nowrap font-display text-[0.9375rem] font-bold tracking-tight text-blue-600 transition-colors group-hover:text-blue-700 md:text-base ${
+                    isCompactHeader ? "lg:text-sm xl:text-lg" : "lg:text-xl"
+                  }`}
+                >
+                  {isBergenPickupPage
+                    ? BRAND.pickup
+                    : isNewBridgePage
+                      ? BRAND.store
+                      : BRAND.parent}
                 </span>
-                <span className="hidden whitespace-nowrap text-[10px] font-medium text-blue-800/90 sm:block lg:text-sm">
+                <span
+                  className={`hidden whitespace-nowrap text-[10px] font-medium text-blue-800/90 sm:block ${
+                    isCompactHeader ? "lg:text-xs" : "lg:text-sm"
+                  }`}
+                >
                   {isBergenPickupPage
                     ? `A ${BRAND.parent} brand`
+                    : isNewBridgePage
+                      ? `A ${BRAND.parent} store`
                     : "Trust Us With Your Threads"}
                 </span>
               </div>
             </Link>
 
-            <nav className="hidden min-w-0 flex-1 items-center justify-center lg:mx-4 lg:flex xl:mx-10">
-              <ul className="flex items-center justify-center gap-2 xl:gap-4 2xl:gap-5">
+            <nav
+              className={`hidden min-w-0 flex-1 items-center justify-center lg:flex ${
+                isCompactHeader ? "lg:mx-0 xl:mx-3" : "lg:mx-4 xl:mx-10"
+              }`}
+            >
+              <ul
+                className={`flex items-center justify-center ${
+                  isCompactHeader ? "gap-0.5 xl:gap-2 2xl:gap-3" : "gap-2 xl:gap-4 2xl:gap-5"
+                }`}
+              >
                 {links.map((l) => (
                   <li key={l.to}>
                     <NavLink
@@ -225,9 +258,19 @@ export default function Navbar() {
                       end={l.to === "/"}
                       className={({ isActive }) =>
                         [
-                          `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-xs xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] ${
-                            l.to === "/" ? "lg:ml-3 lg:pl-3 xl:ml-5 xl:pl-5" : ""
-                          } ${l.to === "/contact" ? "lg:mr-3 lg:pr-3 xl:mr-5 xl:pr-5" : ""}`,
+                          `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-[11px] xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] ${
+                            l.to === "/"
+                              ? isCompactHeader
+                                ? "xl:ml-3 xl:pl-3"
+                                : "lg:ml-3 lg:pl-3 xl:ml-5 xl:pl-5"
+                              : ""
+                          } ${
+                            l.to === "/contact"
+                              ? isCompactHeader
+                                ? "xl:mr-3 xl:pr-3"
+                                : "lg:mr-3 lg:pr-3 xl:mr-5 xl:pr-5"
+                              : ""
+                          }`,
                           isActive
                             ? "text-blue-900"
                             : "text-blue-600 hover:bg-blue-50/90 hover:text-blue-800",
@@ -284,7 +327,7 @@ export default function Navbar() {
               </ul>
             </nav>
 
-            <div className="hidden shrink-0 items-center gap-3 lg:flex xl:gap-4">
+            <div className="hidden shrink-0 items-center gap-2 lg:flex xl:gap-4">
               <div className="flex flex-col items-center text-center text-xs xl:text-base">
                 <a
                   href={`tel:${BRAND.phoneBergen}`}
@@ -294,7 +337,7 @@ export default function Navbar() {
                 </a>
                 <a
                   href={`mailto:${BRAND.email}`}
-                  className="max-w-[8.5rem] truncate text-[11px] text-blue-600/90 transition hover:text-blue-800 xl:max-w-[10.5rem] xl:text-sm"
+                  className="max-w-[7.25rem] truncate text-[10px] text-blue-600/90 transition hover:text-blue-800 xl:max-w-[10.5rem] xl:text-sm"
                 >
                   {BRAND.email}
                 </a>
@@ -303,7 +346,7 @@ export default function Navbar() {
                 href={SCHEDULE_ORDER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-blue-400 via-blue-500 to-blue-700 px-3 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/35 ring-1 ring-white/20 transition hover:from-blue-300 hover:via-blue-500 hover:to-blue-600 hover:shadow-lg xl:px-4 xl:text-base"
+                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-blue-400 via-blue-500 to-blue-700 px-2.5 py-1.5 text-xs font-semibold text-white shadow-md shadow-blue-600/35 ring-1 ring-white/20 transition hover:from-blue-300 hover:via-blue-500 hover:to-blue-600 hover:shadow-lg xl:px-4 xl:py-2 xl:text-base"
                 data-testid="navbar-cta-schedule"
               >
                 Schuedule a Pickup

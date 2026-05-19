@@ -23,7 +23,6 @@ export default function Contact() {
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <section className="page-hero-section pb-6" data-reveal-blur>
-        <p className="overline mb-4">Contact Us</p>
         <h1 className="h1">We&apos;d love to hear from you</h1>
         <span
           className="mt-4 mx-auto block h-1.5 w-24 rounded-full bg-gradient-to-r from-blue-600 to-sky-400"
@@ -31,7 +30,7 @@ export default function Contact() {
           aria-hidden
         />
         <p className="mt-5 text-slate-600 text-lg">
-          Questions, quotes, or feedback â€” use the form or call{" "}
+          Questions, quotes, or feedback, please use the form or call{" "}
           <a href={`tel:${BRAND.phoneBergen}`} className="text-blue-800 font-semibold">
             {BRAND.phoneBergen}
           </a>
@@ -55,7 +54,7 @@ export default function Contact() {
             <p className="mt-3 font-semibold text-slate-900">View on Google Maps</p>
             <p className="mt-2 text-sm text-slate-600">{LOCATIONS.newBridge.full}</p>
             <span className="mt-4 inline-block text-sm font-semibold text-blue-800">
-              Open map â†’
+              Open map →
             </span>
           </motion.a>
           <motion.div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover" data-reveal>

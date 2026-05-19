@@ -210,11 +210,11 @@ export default function Home() {
                 aria-hidden
               />
 
-              <div className="mt-7 relative mx-auto max-w-5xl rounded-[1.75rem] overflow-hidden border border-slate-200 bg-slate-950 shadow-2xl shadow-slate-900/20 ring-1 ring-white/80 group card-hover">
+              <div className="mt-7 relative -mx-5 w-[calc(100%+2.5rem)] max-w-none md:mx-auto md:w-full md:max-w-5xl rounded-[1.25rem] md:rounded-[1.75rem] overflow-hidden border border-slate-200 bg-white shadow-2xl shadow-slate-900/20 ring-1 ring-white/80 group card-hover">
                 <img
                   src={homeSlides[homeSlide].src}
                   alt={homeSlides[homeSlide].alt}
-                  className="w-full h-60 md:h-[28rem] object-contain transition-opacity duration-300"
+                  className="block w-full h-auto transition-opacity duration-300"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent md:block" aria-hidden />
                 {/*
@@ -263,7 +263,7 @@ export default function Home() {
                     <ChevronRight className="h-6 w-6" />
                   </button>
                 </div>
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 rounded-full bg-slate-950/35 px-2.5 py-2 backdrop-blur-sm">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 rounded-full bg-slate-900/45 px-2.5 py-2 backdrop-blur-sm">
                   {homeSlides.map((_, i) => (
                     <button
                       key={i}

@@ -69,11 +69,11 @@ export default function NewBridge() {
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <section className="page-hero-section pb-5 max-w-5xl" data-reveal-blur>
-        <div className="logo-surface mx-auto mb-4 inline-flex rounded-2xl px-6 py-3">
+        <div className="mx-auto mb-4 inline-flex">
           <img
             src={IMAGES.logoNewBridge}
             alt={BRAND.store}
-            className="h-12 md:h-14 w-auto max-w-[min(100%,18rem)] object-contain"
+            className="h-24 md:h-28 w-auto max-w-[min(100%,36rem)] object-contain"
           />
         </div>
         <p className="overline mb-2 hidden">{BRAND.store}</p>
@@ -149,8 +149,9 @@ export default function NewBridge() {
             {BRAND.phoneStore}
           </a>
         </p>
-        <p className="mt-5 text-slate-600 leading-relaxed">
-          Newly renovated in late 2025. Our clean, comfortable
+        <p className="mt-5 text-slate-600 leading-relaxed text-center">
+          Newly renovated in late 2025.<br />
+          Our clean, comfortable
           laundromat is designed to make laundry day as easy and stress-free as possible.
           <br />
           Pickup orders for <strong>{BRAND.pickup}</strong> are processed here.
@@ -258,7 +259,7 @@ export default function NewBridge() {
       </section>
 
       <section
-        className="border-y border-slate-200/70 bg-gradient-to-b from-slate-50 to-white pt-6 pb-10 md:pt-8 md:pb-12"
+        className="hidden border-y border-slate-200/70 bg-gradient-to-b from-slate-50 to-white pt-6 pb-10 md:pt-8 md:pb-12"
         data-reveal
       >
         <div className="container-pad max-w-5xl mx-auto">

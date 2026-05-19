@@ -99,7 +99,7 @@ export default function BergenLaundry() {
     >
       <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} />
 
-      <section className="page-hero-section pb-5" data-reveal-blur>
+      <section className="page-hero-section pb-5 max-w-5xl" data-reveal-blur>
         <div className="mx-auto mb-4 flex w-44 h-44 items-center justify-center">
           <img
             src={IMAGES.logoBergen}
@@ -108,8 +108,8 @@ export default function BergenLaundry() {
           />
         </div>
         <p className="overline mb-3 hidden">{BRAND.pickup}</p>
-        <h1 className="h1 max-w-3xl lg:whitespace-nowrap">Bergen Laundry Service</h1>
-        <h2 className="mt-3 font-display text-xl md:text-2xl font-semibold text-slate-900">
+        <h1 className="h1 w-full text-center lg:whitespace-nowrap">Bergen Laundry Service</h1>
+        <h2 className="mt-3 w-full font-display text-center text-xl md:text-2xl font-semibold text-slate-900">
           Welcome To North Jersey&apos;s Best FREE Laundry Pickup &amp; Delivery Service
         </h2>
         <span
@@ -163,6 +163,8 @@ export default function BergenLaundry() {
             <a
               href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
               className="text-blue-800 font-medium underline underline-offset-2"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Terms of Service
             </a>{" "}
@@ -416,6 +418,8 @@ export default function BergenLaundry() {
             <a
               href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
               className="text-blue-800 font-medium underline underline-offset-2"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Terms of Service
             </a>
@@ -527,6 +531,8 @@ export default function BergenLaundry() {
           <a
             href={`${import.meta.env.BASE_URL}terms-of-service-for-bergen-laundry-pickup-delivery.pdf`}
             className="text-blue-800 font-medium underline underline-offset-2"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Terms of Service
           </a>
