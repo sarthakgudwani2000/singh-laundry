@@ -100,9 +100,9 @@ export default function BergenLaundry() {
       <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} />
 
       <section className="page-hero-section pb-5 max-w-5xl" data-reveal-blur>
-        <div className="mx-auto mb-4 flex w-44 h-44 items-center justify-center">
+        <div className="mx-auto mb-4 flex w-52 h-52 items-center justify-center">
           <img
-            src={IMAGES.logoBergen}
+            src={IMAGES.logoBergenBlue}
             alt="Bergen Laundry Service"
             className="h-full w-full object-contain"
           />
@@ -198,9 +198,9 @@ export default function BergenLaundry() {
       <section className="container-pad pb-7 md:pb-9" data-testid="bergen-home-mirror-promo">
         <div className="max-w-4xl mx-auto">
           <div className="hidden justify-center lg:justify-start" data-reveal>
-            <div className="w-44 h-44 flex flex-col items-center justify-center p-4">
+            <div className="w-52 h-52 flex flex-col items-center justify-center p-4">
               <img
-                src={IMAGES.logoBergen}
+                src={IMAGES.logoBergenBlue}
                 alt="Bergen Laundry Service"
                 className="h-full w-full object-contain"
               />

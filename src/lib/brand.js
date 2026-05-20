@@ -122,6 +122,7 @@ const washFoldServices1 = img("wash-dry-fold-service-1-services-page.png");
 const washFoldServices2 = img("wash-dry-fold-service-2-services-page.png");
 const logoSingh = img("sl-shirt-logo-1aa-w314-o.png");
 const logoBergen = img("Bergen-Laundry-Logo.png");
+const logoBergenBlue = img("Bergen-Laundry-Logo (Blue logo).png");
 const logoNewBridge = img("New Bridge Laundromat logo.png");
 const newBridgePhoto1 = img("New Bridge Laundromat (Slideshow 1).jpg");
 const newBridgePhoto2 = img("New Bridge Laundromat (Slideshow 2).jpg");
@@ -141,6 +142,7 @@ export const IMAGES = {
 
   logoSingh,
   logoBergen,
+  logoBergenBlue,
   logoNewBridge,
 
   homePromoVan: homePagePromo,

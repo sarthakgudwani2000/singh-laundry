@@ -1,18 +1,42 @@
-﻿import { useRef } from "react";
+﻿import { useLayoutEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   useGsapFloatAccents,
   useGsapScrollReveal,
 } from "@/hooks/useGsapPageAnimations";
-import { MapPin } from "lucide-react";
+import { ScrollTrigger } from "@/lib/gsap";
+import { MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import { BRAND, IMAGES, LOCATIONS, MAPS_LINK_NEW_BRIDGE } from "@/lib/brand";
 import ContactForm from "@/components/ContactForm";
 
+const contactSlides = [
+  { src: IMAGES.contactSideA, alt: "Bergen Laundry Service delivery van" },
+  {
+    src: IMAGES.contactSideB,
+    alt: "New Bridge Laundromat — self-serve dryers and folding area",
+  },
+];
+
 export default function Contact() {
   const pageRef = useRef(null);
+  const [slide, setSlide] = useState(0);
   const reduceMotion = useReducedMotion() === true;
+  const next = () => setSlide((i) => (i + 1) % contactSlides.length);
+  const prev = () =>
+    setSlide((i) => (i - 1 + contactSlides.length) % contactSlides.length);
   useGsapScrollReveal(pageRef, reduceMotion);
   useGsapFloatAccents(pageRef, reduceMotion);
+
+  useLayoutEffect(() => {
+    if (reduceMotion) return;
+    const refresh = () => ScrollTrigger.refresh();
+    const id = requestAnimationFrame(refresh);
+    const timeoutId = setTimeout(refresh, 450);
+    return () => {
+      cancelAnimationFrame(id);
+      clearTimeout(timeoutId);
+    };
+  }, [reduceMotion]);
 
   return (
     <motion.div
@@ -39,42 +63,88 @@ export default function Contact() {
       </section>
 
       <section className="container-pad pb-14 grid lg:grid-cols-2 gap-8 items-start max-w-6xl mx-auto">
-        <div className="space-y-5" data-reveal-stagger="slide-x">
-          <motion.a
-            href={MAPS_LINK_NEW_BRIDGE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block surface-card p-8 text-center hover:border-blue-300"
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.99 }}
+        <motion.div className="order-2 lg:order-1 space-y-5">
+          <motion.div className="space-y-5">
+            <motion.a
+              href={MAPS_LINK_NEW_BRIDGE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block surface-card p-8 text-center hover:border-blue-300"
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.99 }}
+            >
+              <span className="inline-block text-blue-800" data-reveal-spin>
+                <MapPin className="h-10 w-10 mx-auto" aria-hidden />
+              </span>
+              <p className="mt-3 font-semibold text-slate-900">View on Google Maps</p>
+              <p className="mt-2 text-sm text-slate-600">{LOCATIONS.newBridge.full}</p>
+              <span className="mt-4 inline-block text-sm font-semibold text-blue-800">
+                Open map →
+              </span>
+            </motion.a>
+            <motion.div className="lg:hidden relative rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover h-52">
+              <img
+                src={contactSlides[slide].src}
+                alt={contactSlides[slide].alt}
+                className="w-full h-full object-cover"
+              />
+              <motion.div className="absolute inset-0 flex items-center justify-between px-2 pointer-events-none">
+                <button
+                  type="button"
+                  onClick={prev}
+                  className="pointer-events-auto h-10 w-10 rounded-full bg-white/90 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={next}
+                  className="pointer-events-auto h-10 w-10 rounded-full bg-white/90 text-slate-900 shadow-lg border border-slate-200 flex items-center justify-center hover:bg-white"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </motion.div>
+              <motion.div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 rounded-full bg-slate-900/45 px-2.5 py-2 backdrop-blur-sm">
+                {contactSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setSlide(i)}
+                    className={`h-2 w-2 rounded-full transition-colors ${
+                      i === slide ? "bg-white" : "bg-white/50"
+                    }`}
+                    aria-label={`Show slide ${i + 1}`}
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
+          </motion.div>
+          <motion.div
+            className="hidden lg:block rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover"
+            data-reveal
           >
-            <span className="inline-block text-blue-800" data-reveal-spin>
-              <MapPin className="h-10 w-10 mx-auto" aria-hidden />
-            </span>
-            <p className="mt-3 font-semibold text-slate-900">View on Google Maps</p>
-            <p className="mt-2 text-sm text-slate-600">{LOCATIONS.newBridge.full}</p>
-            <span className="mt-4 inline-block text-sm font-semibold text-blue-800">
-              Open map →
-            </span>
-          </motion.a>
-          <motion.div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover" data-reveal>
             <img
               src={IMAGES.contactSideA}
               alt="Bergen Laundry Service delivery van"
               className="w-full h-52 object-cover"
             />
           </motion.div>
-          <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover" data-reveal>
+          <motion.div
+            className="hidden lg:block rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover"
+            data-reveal
+          >
             <img
               src={IMAGES.contactSideB}
-              alt="New Bridge Laundromat â€” self-serve dryers and folding area"
+              alt="New Bridge Laundromat — self-serve dryers and folding area"
               className="w-full h-52 object-cover"
             />
-          </div>
-        </div>
-        <div data-reveal-scale>
+          </motion.div>
+        </motion.div>
+        <motion.div className="order-1 lg:order-2" data-reveal-scale>
           <ContactForm />
-        </div>
+        </motion.div>
       </section>
     </motion.div>
   );
