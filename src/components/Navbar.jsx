@@ -249,8 +249,8 @@ export default function Navbar() {
             </Link>
 
             <nav
-              className={`hidden shrink-0 items-center justify-center md:flex md:flex-1 ${
-                isCompactHeader ? "md:mx-2 xl:mx-3" : "md:mx-4 xl:mx-10"
+              className={`hidden min-w-0 flex-1 items-center justify-center lg:flex ${
+                isCompactHeader ? "lg:mx-0 xl:mx-3" : "lg:mx-4 xl:mx-10"
               }`}
             >
               <ul
