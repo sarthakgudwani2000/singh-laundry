@@ -8,13 +8,13 @@ import {
   useScroll,
 } from "framer-motion";
 import { Menu, X, Phone, Mail, ArrowRight } from "lucide-react";
-import { BRAND, IMAGES, SCHEDULE_ORDER_URL, BERGEN_SITE_URL, NEW_BRIDGE_SITE_URL } from "@/lib/brand";
+import { BRAND, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
 
 const links = [
   { to: "/", label: "Home", short: "Home" },
   { to: "/services", label: "Services", short: "Services" },
-  { href: BERGEN_SITE_URL, label: BRAND.pickup, short: "Bergen" },
-  { href: NEW_BRIDGE_SITE_URL, label: "New Bridge Laundromat", short: "New Bridge" },
+  { to: "/bergen-laundry-service", label: BRAND.pickup, short: "Bergen" },
+  { to: "/new-bridge-laundromat", label: "New Bridge Laundromat", short: "New Bridge" },
   { to: "/about", label: "About Us", short: "About" },
   { to: "/contact", label: "Contact Us", short: "Contact" },
 ];
@@ -101,7 +101,7 @@ export default function Navbar() {
                         ) : (
                           <NavLink
                             to={l.to}
-                            end={l.to === "/"}
+                            end={l.to === "/" || l.to === "/bergen-laundry-service" || l.to === "/new-bridge-laundromat"}
                             onClick={() => setOpen(false)}
                             className={({ isActive }) =>
                               `mb-1 block rounded-xl px-4 py-3.5 text-sm font-medium transition-colors ${
@@ -249,8 +249,8 @@ export default function Navbar() {
             </Link>
 
             <nav
-              className={`hidden min-w-0 flex-1 items-center justify-center lg:flex ${
-                isCompactHeader ? "lg:mx-0 xl:mx-3" : "lg:mx-4 xl:mx-10"
+              className={`hidden shrink-0 items-center justify-center md:flex md:flex-1 ${
+                isCompactHeader ? "md:mx-2 xl:mx-3" : "md:mx-4 xl:mx-10"
               }`}
             >
               <ul
@@ -278,7 +278,7 @@ export default function Navbar() {
                     ) : (
                       <NavLink
                         to={l.to}
-                        end={l.to === "/"}
+                        end={l.to === "/" || l.to === "/bergen-laundry-service" || l.to === "/new-bridge-laundromat"}
                         className={({ isActive }) =>
                           [
                             `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-[11px] xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] ${
@@ -303,10 +303,25 @@ export default function Navbar() {
                       >
                         {({ isActive }) => (
                           <>
-                            <span className="hidden text-center leading-tight 2xl:inline-block">
-                              {l.label}
-                            </span>
-                            <span className="2xl:hidden">{l.short}</span>
+                            {l.short === "Bergen" || l.short === "New Bridge" ? (
+                              <>
+                                <span className="hidden text-center leading-tight lg:inline-block">
+                                  {l.short === "Bergen" ? (
+                                    <>Bergen Laundry<br />Service</>
+                                  ) : (
+                                    <>New Bridge<br />Laundromat</>
+                                  )}
+                                </span>
+                                <span className="lg:hidden">{l.short}</span>
+                              </>
+                            ) : (
+                              <>
+                                <span className="hidden text-center leading-tight 2xl:inline-block">
+                                  {l.label}
+                                </span>
+                                <span className="2xl:hidden">{l.short}</span>
+                              </>
+                            )}
                             {isActive ? (
                               <motion.span
                                 layoutId="nav-underline"
