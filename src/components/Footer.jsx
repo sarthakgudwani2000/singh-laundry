@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaYelp } from "react-icons/fa6";
 import { SiGooglemaps } from "react-icons/si";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { BRAND, LOCATIONS, SOCIAL } from "@/lib/brand";
+import { BRAND, LOCATIONS, SOCIAL, BERGEN_SITE_URL, NEW_BRIDGE_SITE_URL } from "@/lib/brand";
 
 function SocialRow({ label, links }) {
   return (
@@ -118,14 +118,14 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/bergen-laundry-service" className="hover:text-white">
+              <a href={BERGEN_SITE_URL} className="hover:text-white">
                 {BRAND.pickup}
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/new-bridge-laundromat" className="hover:text-white">
+              <a href={NEW_BRIDGE_SITE_URL} className="hover:text-white">
                 {BRAND.store}
-              </Link>
+              </a>
             </li>
             <li>
               <Link to="/contact" className="hover:text-white">
@@ -198,9 +198,9 @@ export default function Footer() {
             </Link>
           </p>
           <p className="text-center md:text-left">
-            <Link to="/new-bridge-laundromat" className="hover:text-slate-300">
+            <a href={NEW_BRIDGE_SITE_URL} className="hover:text-slate-300">
               {BRAND.store}
-            </Link>
+            </a>
             {" | "}
             <Link to="/privacy" className="hover:text-slate-300">
               Privacy Policy

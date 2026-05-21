@@ -8,17 +8,13 @@ import {
   useScroll,
 } from "framer-motion";
 import { Menu, X, Phone, Mail, ArrowRight } from "lucide-react";
-import { BRAND, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
+import { BRAND, IMAGES, SCHEDULE_ORDER_URL, BERGEN_SITE_URL, NEW_BRIDGE_SITE_URL } from "@/lib/brand";
 
 const links = [
   { to: "/", label: "Home", short: "Home" },
   { to: "/services", label: "Services", short: "Services" },
-  { to: "/bergen-laundry-service", label: BRAND.pickup, short: "Bergen" },
-  {
-    to: "/new-bridge-laundromat",
-    label: "New Bridge Laundromat",
-    short: "New Bridge",
-  },
+  { href: BERGEN_SITE_URL, label: BRAND.pickup, short: "Bergen" },
+  { href: NEW_BRIDGE_SITE_URL, label: "New Bridge Laundromat", short: "New Bridge" },
   { to: "/about", label: "About Us", short: "About" },
   { to: "/contact", label: "Contact Us", short: "Contact" },
 ];
@@ -88,26 +84,37 @@ export default function Navbar() {
                   <nav className="flex-1 overflow-y-auto px-3 py-4">
                     {links.map((l, i) => (
                       <motion.div
-                        key={l.to}
+                        key={l.to ?? l.href}
                         initial={{ opacity: 0, x: 12 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.04 * i, duration: 0.22 }}
                       >
-                        <NavLink
-                          to={l.to}
-                          end={l.to === "/"}
-                          onClick={() => setOpen(false)}
-                          className={({ isActive }) =>
-                            `mb-1 block rounded-xl px-4 py-3.5 text-sm font-medium transition-colors ${
-                              isActive
-                                ? "bg-blue-50 text-blue-900"
-                                : "text-slate-700 hover:bg-slate-50"
-                            }`
-                          }
-                          data-testid={`mobile-nav-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
-                        >
-                          {l.label}
-                        </NavLink>
+                        {l.href ? (
+                          <a
+                            href={l.href}
+                            onClick={() => setOpen(false)}
+                            className="mb-1 block rounded-xl px-4 py-3.5 text-sm font-medium transition-colors text-slate-700 hover:bg-slate-50"
+                            data-testid={`mobile-nav-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
+                          >
+                            {l.label}
+                          </a>
+                        ) : (
+                          <NavLink
+                            to={l.to}
+                            end={l.to === "/"}
+                            onClick={() => setOpen(false)}
+                            className={({ isActive }) =>
+                              `mb-1 block rounded-xl px-4 py-3.5 text-sm font-medium transition-colors ${
+                                isActive
+                                  ? "bg-blue-50 text-blue-900"
+                                  : "text-slate-700 hover:bg-slate-50"
+                              }`
+                            }
+                            data-testid={`mobile-nav-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
+                          >
+                            {l.label}
+                          </NavLink>
+                        )}
                       </motion.div>
                     ))}
                   </nav>
@@ -252,76 +259,65 @@ export default function Navbar() {
                 }`}
               >
                 {links.map((l) => (
-                  <li key={l.to}>
-                    <NavLink
-                      to={l.to}
-                      end={l.to === "/"}
-                      className={({ isActive }) =>
-                        [
-                          `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-[11px] xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] ${
-                            l.to === "/"
-                              ? isCompactHeader
-                                ? "xl:ml-3 xl:pl-3"
-                                : "lg:ml-3 lg:pl-3 xl:ml-5 xl:pl-5"
-                              : ""
-                          } ${
-                            l.to === "/contact"
-                              ? isCompactHeader
-                                ? "xl:mr-3 xl:pr-3"
-                                : "lg:mr-3 lg:pr-3 xl:mr-5 xl:pr-5"
-                              : ""
-                          }`,
-                          isActive
-                            ? "text-blue-900"
-                            : "text-blue-600 hover:bg-blue-50/90 hover:text-blue-800",
-                        ].join(" ")
-                      }
-                      data-testid={`nav-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    >
-                      {({ isActive }) => (
-                        <>
-                          <span
-                            className={`hidden text-center leading-tight 2xl:inline-block ${
-                              l.to === "/bergen-laundry-service" || l.to === "/new-bridge-laundromat"
-                                ? "lg:inline-block"
+                  <li key={l.to ?? l.href}>
+                    {l.href ? (
+                      <a
+                        href={l.href}
+                        className="relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-[11px] xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] text-blue-600 hover:bg-blue-50/90 hover:text-blue-800"
+                        data-testid={`nav-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
+                      >
+                        <span className="hidden text-center leading-tight lg:inline-block">
+                          {l.short === "Bergen" ? (
+                            <>Bergen Laundry<br />Service</>
+                          ) : (
+                            <>New Bridge<br />Laundromat</>
+                          )}
+                        </span>
+                        <span className="lg:hidden">{l.short}</span>
+                      </a>
+                    ) : (
+                      <NavLink
+                        to={l.to}
+                        end={l.to === "/"}
+                        className={({ isActive }) =>
+                          [
+                            `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-[11px] xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] ${
+                              l.to === "/"
+                                ? isCompactHeader
+                                  ? "xl:ml-3 xl:pl-3"
+                                  : "lg:ml-3 lg:pl-3 xl:ml-5 xl:pl-5"
                                 : ""
-                            }`}
-                          >
-                            {l.to === "/bergen-laundry-service" ? (
-                              <>
-                                Bergen Laundry
-                                <br />
-                                Service
-                              </>
-                            ) : l.to === "/new-bridge-laundromat" ? (
-                              <>
-                                New Bridge
-                                <br />
-                                Laundromat
-                              </>
-                            ) : (
-                              l.label
-                            )}
-                          </span>
-                          <span
-                            className={`2xl:hidden ${
-                              l.to === "/bergen-laundry-service" || l.to === "/new-bridge-laundromat"
-                                ? "lg:hidden"
+                            } ${
+                              l.to === "/contact"
+                                ? isCompactHeader
+                                  ? "xl:mr-3 xl:pr-3"
+                                  : "lg:mr-3 lg:pr-3 xl:mr-5 xl:pr-5"
                                 : ""
-                            }`}
-                          >
-                            {l.short}
-                          </span>
-                          {isActive ? (
-                            <motion.span
-                              layoutId="nav-underline"
-                              className="absolute bottom-0 left-2.5 right-2.5 h-0.5 rounded-full bg-blue-600"
-                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                            />
-                          ) : null}
-                        </>
-                      )}
-                    </NavLink>
+                            }`,
+                            isActive
+                              ? "text-blue-900"
+                              : "text-blue-600 hover:bg-blue-50/90 hover:text-blue-800",
+                          ].join(" ")
+                        }
+                        data-testid={`nav-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
+                      >
+                        {({ isActive }) => (
+                          <>
+                            <span className="hidden text-center leading-tight 2xl:inline-block">
+                              {l.label}
+                            </span>
+                            <span className="2xl:hidden">{l.short}</span>
+                            {isActive ? (
+                              <motion.span
+                                layoutId="nav-underline"
+                                className="absolute bottom-0 left-2.5 right-2.5 h-0.5 rounded-full bg-blue-600"
+                                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                              />
+                            ) : null}
+                          </>
+                        )}
+                      </NavLink>
+                    )}
                   </li>
                 ))}
               </ul>

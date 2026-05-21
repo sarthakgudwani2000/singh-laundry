@@ -18,6 +18,10 @@ export const BRAND = {
 export const SCHEDULE_ORDER_URL =
   "https://app.trycents.com/new-order/YWF4/home";
 
+/** External site URLs for each brand's standalone website. */
+export const BERGEN_SITE_URL = "https://bergenlaundryservice.com/bergen-laundry-service-new/";
+export const NEW_BRIDGE_SITE_URL = "https://newbridgelaundromat.com/new-bridge-laundromat-new/";
+
 /** Pricing & policy lines (aligned with client template / singhlaundry concept). */
 export const PRICING = {
   bergenWashFoldLb: "$2.15",

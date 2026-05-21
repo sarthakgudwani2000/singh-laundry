@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import "@/App.css";
-import { SCHEDULE_ORDER_URL } from "@/lib/brand";
+import { SCHEDULE_ORDER_URL, BERGEN_SITE_URL, NEW_BRIDGE_SITE_URL } from "@/lib/brand";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import Services from "@/pages/Services";
-import BergenLaundry from "@/pages/BergenLaundry";
-import NewBridge from "@/pages/NewBridge";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Privacy from "@/pages/Privacy";
@@ -23,6 +21,28 @@ function RedirectToExternalBooking() {
   );
 }
 
+function RedirectToBergen() {
+  useEffect(() => {
+    window.location.replace(BERGEN_SITE_URL);
+  }, []);
+  return (
+    <div className="container-pad py-14 text-center text-slate-600 text-sm">
+      Redirecting to Bergen Laundry Service…
+    </div>
+  );
+}
+
+function RedirectToNewBridge() {
+  useEffect(() => {
+    window.location.replace(NEW_BRIDGE_SITE_URL);
+  }, []);
+  return (
+    <div className="container-pad py-14 text-center text-slate-600 text-sm">
+      Redirecting to New Bridge Laundromat…
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <div className="App">
@@ -32,17 +52,11 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/bergen-laundry-service" element={<BergenLaundry />} />
+            <Route path="/bergen-laundry-service" element={<RedirectToBergen />} />
             {/* Legacy WordPress on same host: singhlaundry.com/bergenlaundryservice-com/ */}
-            <Route
-              path="/bergenlaundryservice-com"
-              element={<Navigate to="/bergen-laundry-service" replace />}
-            />
-            <Route
-              path="/bergenlaundryservice-com/*"
-              element={<Navigate to="/bergen-laundry-service" replace />}
-            />
-            <Route path="/new-bridge-laundromat" element={<NewBridge />} />
+            <Route path="/bergenlaundryservice-com" element={<RedirectToBergen />} />
+            <Route path="/bergenlaundryservice-com/*" element={<RedirectToBergen />} />
+            <Route path="/new-bridge-laundromat" element={<RedirectToNewBridge />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route

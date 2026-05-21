@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { BRAND, PRICING, LOCATIONS, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
+import { BRAND, PRICING, LOCATIONS, IMAGES, SCHEDULE_ORDER_URL, BERGEN_SITE_URL, NEW_BRIDGE_SITE_URL } from "@/lib/brand";
 import { fillServicesTemplate } from "@/lib/templateCopy";
 import {
   useGsapFloatAccents,
@@ -80,12 +80,12 @@ export default function Services() {
         <div className="container-pad max-w-6xl mx-auto">
           <div className="text-center" data-reveal>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
-              <Link
-                to="/bergen-laundry-service"
+              <a
+                href={BERGEN_SITE_URL}
                 className="inline-block underline decoration-blue-300 decoration-2 underline-offset-4 transition-all duration-300 hover:-translate-y-1 hover:text-blue-800 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-4"
               >
                 {copy.pickup.title}
-              </Link>
+              </a>
             </h2>
             <span
               className="mt-3 mx-auto block h-1 w-24 rounded-full bg-gradient-to-r from-blue-600 to-sky-400"
@@ -141,9 +141,9 @@ export default function Services() {
                     Schedule a pickup <ArrowRight className="h-4 w-4" />
                   </motion.a>
                   <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                    <Link to="/bergen-laundry-service" className="btn-secondary">
+                    <a href={BERGEN_SITE_URL} className="btn-secondary">
                       Pricing &amp; policies
-                    </Link>
+                    </a>
                   </motion.div>
                 </div>
                 <p className="hidden mt-4 text-xs text-slate-500">
@@ -261,9 +261,9 @@ export default function Services() {
           <p className="mt-5 content-prose">{copy.selfServe.body}</p>
         </div>
         <motion.div className="mt-8" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-          <Link to="/new-bridge-laundromat" className="btn-primary inline-flex">
+          <a href={NEW_BRIDGE_SITE_URL} className="btn-primary inline-flex">
             Visit {BRAND.store} <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
         </motion.div>
       </motion.section>
 
@@ -297,9 +297,9 @@ export default function Services() {
               ))}
             </ul>
             <motion.div className="mt-6 inline-block" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-              <Link to="/new-bridge-laundromat" className="btn-secondary inline-flex">
+              <a href={NEW_BRIDGE_SITE_URL} className="btn-secondary inline-flex">
                 Drop-off details <ArrowRight className="h-4 w-4" />
-              </Link>
+              </a>
             </motion.div>
           </div>
           <div className="hidden lg:block rounded-3xl overflow-hidden border border-slate-200 shadow-lg min-h-[240px] card-hover" data-reveal>

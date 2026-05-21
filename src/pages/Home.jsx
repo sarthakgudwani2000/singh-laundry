@@ -199,7 +199,7 @@ export default function Home() {
                   Welcome to Singh Laundry,
                 </span>
                 <span className="mt-2 block text-2xl sm:text-3xl lg:text-4xl text-blue-950">
-                  the home of Bergen Laundry Serrvice &amp; New Bridge Laundromat in Bergenfield, NJ
+                  the home of Bergen Laundry Service &amp; New Bridge Laundromat in Bergenfield, NJ
                 </span>
               </h1>
               <h2 className="mt-4 max-w-3xl mx-auto text-center font-display text-lg md:text-2xl font-semibold text-slate-700">
