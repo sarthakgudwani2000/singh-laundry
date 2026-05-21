@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { BRAND, PRICING, LOCATIONS, IMAGES, SCHEDULE_ORDER_URL, BERGEN_SITE_URL, NEW_BRIDGE_SITE_URL } from "@/lib/brand";
