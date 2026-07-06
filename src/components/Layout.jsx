@@ -30,6 +30,11 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     if (!hash) window.scrollTo(0, 0);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "virtual_page_view",
+      page_path: `${pathname}${hash}`,
+    });
   }, [pathname, hash]);
 
   return (

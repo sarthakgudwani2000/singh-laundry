@@ -8,13 +8,13 @@ import {
   useScroll,
 } from "framer-motion";
 import { Menu, X, Phone, Mail, ArrowRight } from "lucide-react";
-import { BRAND, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
+import { BRAND, IMAGES, SCHEDULE_ORDER_URL, BERGEN_SITE_URL, NEW_BRIDGE_SITE_URL } from "@/lib/brand";
 
 const links = [
   { to: "/", label: "Home", short: "Home" },
   { to: "/services", label: "Services", short: "Services" },
-  { to: "/bergen-laundry-service", label: BRAND.pickup, short: "Bergen" },
-  { to: "/new-bridge-laundromat", label: "New Bridge Laundromat", short: "New Bridge" },
+  { href: BERGEN_SITE_URL, label: BRAND.pickup, short: "Bergen" },
+  { href: NEW_BRIDGE_SITE_URL, label: "New Bridge Laundromat", short: "New Bridge" },
   { to: "/about", label: "About Us", short: "About" },
   { to: "/contact", label: "Contact Us", short: "Contact" },
 ];
@@ -43,6 +43,22 @@ export default function Navbar() {
       document.body.style.overflow = prev;
     };
   }, [open]);
+
+  // ── DEBUG LOGGING ──────────────────────────────────────────────
+  useEffect(() => {
+    console.group("%c[Singh Navbar] location update", "color:#dc2626;font-weight:bold");
+    console.log("window.location.href    :", window.location.href);
+    console.log("window.location.hash    :", window.location.hash);
+    console.log("window.location.pathname:", window.location.pathname);
+    console.log("useLocation().pathname  :", pathname);
+    console.log("isCompactHeader         :", isCompactHeader);
+    console.table(links.map((l) => ({
+      label: l.label,
+      type: l.href ? "EXTERNAL href" : "INTERNAL NavLink",
+      value: l.href ?? l.to,
+    })));
+    console.groupEnd();
+  }, [pathname]);
 
   const mobileDrawer =
     typeof document !== "undefined"
@@ -205,19 +221,19 @@ export default function Navbar() {
                 {isBergenPickupPage ? (
                   <img
                     src={IMAGES.logoBergen}
-                    alt=""
+                    alt="Bergen Laundry Service logo"
                     className="h-full w-full object-contain"
                   />
                 ) : isNewBridgePage ? (
                   <img
                     src={IMAGES.logoNewBridge}
-                    alt=""
+                    alt="New Bridge Laundromat logo"
                     className="h-full w-auto max-w-none object-contain"
                   />
                 ) : (
                   <img
                     src={IMAGES.logoSingh}
-                    alt=""
+                    alt="Singh Laundry logo"
                     className="h-full w-full object-contain"
                   />
                 )}
@@ -263,6 +279,7 @@ export default function Navbar() {
                     {l.href ? (
                       <a
                         href={l.href}
+                        onClick={() => console.log("%c[Singh Navbar] tab click → EXTERNAL", "color:#15803d;font-weight:bold", { label: l.label, href: l.href })}
                         className="relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-[11px] xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] text-blue-600 hover:bg-blue-50/90 hover:text-blue-800"
                         data-testid={`nav-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
                       >
@@ -279,6 +296,7 @@ export default function Navbar() {
                       <NavLink
                         to={l.to}
                         end={l.to === "/" || l.to === "/bergen-laundry-service" || l.to === "/new-bridge-laundromat"}
+                        onClick={() => console.log("%c[Singh Navbar] tab click → INTERNAL", "color:#9333ea;font-weight:bold", { label: l.label, to: l.to })}
                         className={({ isActive }) =>
                           [
                             `relative block whitespace-nowrap rounded-lg px-1.5 py-1.5 text-xs font-medium tracking-tight transition-colors lg:text-[11px] xl:px-2.5 xl:text-sm 2xl:px-3 2xl:text-[0.9375rem] ${

@@ -22,6 +22,9 @@ export const SCHEDULE_ORDER_URL =
 export const BERGEN_SITE_URL = "https://bergenlaundryservice.com/";
 export const NEW_BRIDGE_SITE_URL = "https://newbridgelaundromat.com/";
 
+/** This site's own canonical domain — used to build canonical/OG URLs per route. */
+export const SITE_URL = "https://singhlaundry.com/";
+
 /** Pricing & policy lines (aligned with client template / singhlaundry concept). */
 export const PRICING = {
   bergenWashFoldLb: "$2.15",
@@ -137,6 +140,9 @@ const aboutPhoto = img("home-page-image-1c-w1685-o.jpg");
 const commercialDryers = img("laundromat-dryers.png");
 const operationBags = img("laundry-operation-bags.png");
 const washFoldStaff = img("wash-fold-staff.png");
+const contactSlideNew = img("ContactUs-Page-slide.jpg");
+const bergenVanWrapSlide1 = img("BergenLaundryService-Page-slide-1.jpg");
+const bergenVanWrapSlide2 = img("BergenLaundryService-Page-slide-2.jpg");
 
 export const IMAGES = {
   clientBergenVan: homePagePromo,
@@ -162,6 +168,8 @@ export const IMAGES = {
   bergenPromoVan: homePagePromo,
   bergenPickupAside: washFoldStaff,
   bergenParallax: operationBags,
+  bergenVanWrapSlide1,
+  bergenVanWrapSlide2,
 
   servicesPickup: pickupServices,
   servicesWashFold: washFoldServices1,
@@ -179,6 +187,7 @@ export const IMAGES = {
   aboutBanner: aboutPhoto,
   contactSideA: homePagePromo,
   contactSideB: newBridgeHome,
+  contactSlideNew,
 };
 
 export const PICKUP_WINDOWS = [
@@ -232,3 +241,15 @@ export const SERVICE_ZIPS = [
   { zip: "07666", town: "Teaneck" },
   { zip: "07670", town: "Tenafly" },
 ];
+
+/** JSON-LD: Singh Laundry is the corporate parent — no storefront/GBP of its own. */
+export const ORG_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: BRAND.parent,
+  url: SITE_URL,
+  logo: new URL(IMAGES.logoSingh, SITE_URL).href,
+  description:
+    "Singh Laundry is the Bergenfield, NJ parent company behind Bergen Laundry Service and New Bridge Laundromat.",
+  brand: [{ "@type": "Brand", name: BRAND.pickup }, { "@type": "Brand", name: BRAND.store }],
+};

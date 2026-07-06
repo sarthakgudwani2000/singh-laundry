@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { BRAND, PRICING, LOCATIONS, HOURS, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
 import { NEW_BRIDGE_AMENITIES } from "@/lib/templateCopy";
+import Seo from "@/components/Seo";
 
 const carouselSlides = [
   { src: IMAGES.newBridgeCarousel1, alt: "New Bridge Laundromat slideshow photo 1" },
@@ -68,6 +69,12 @@ export default function NewBridge() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
+      <Seo
+        title="New Bridge Laundromat | Self-Serve Laundry | Singh Laundry"
+        description="New Bridge Laundromat in Bergenfield, NJ offers self-service laundry, coin-operated machines, and wash & fold drop-off. A Singh Laundry location."
+        path="/new-bridge-laundromat"
+        image={IMAGES.logoNewBridge}
+      />
       <section className="page-hero-section pb-5 max-w-5xl" data-reveal-blur>
         <div className="mx-auto mb-4 inline-flex">
           <img
@@ -78,6 +85,9 @@ export default function NewBridge() {
         </div>
         <p className="overline mb-2 hidden">{BRAND.store}</p>
         <h1 className="h1 lg:whitespace-nowrap">New Bridge Laundromat</h1>
+        <h2 className="mt-3 max-w-2xl mx-auto text-center font-display text-lg md:text-xl font-semibold text-slate-700">
+          Self-Service Laundromat &amp; Wash, Dry &amp; Fold in Bergenfield, NJ
+        </h2>
         <span
           className="mt-4 mx-auto block h-1.5 w-28 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-500"
           data-reveal-line

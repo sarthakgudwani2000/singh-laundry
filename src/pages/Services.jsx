@@ -9,6 +9,7 @@ import {
   useGsapImgParallax,
   useGsapScrollReveal,
 } from "@/hooks/useGsapPageAnimations";
+import Seo from "@/components/Seo";
 
 export default function Services() {
   const { hash } = useLocation();
@@ -54,9 +55,15 @@ export default function Services() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
+      <Seo
+        title="Laundry Services in Bergenfield, NJ | Singh Laundry"
+        description="Explore Singh Laundry's full lineup: wash & fold, free pickup & delivery, self-serve laundromat, and commercial laundry service across Bergen County, NJ."
+        path="/services"
+        image={IMAGES.logoSingh}
+      />
       <section className="page-hero-section max-w-none" data-reveal-blur>
         <p className="overline mb-3 hidden">Services</p>
-        <h1 className="h1 whitespace-nowrap">Our Laundry Care Services</h1>
+        <h1 className="h1 lg:whitespace-nowrap">Our Laundry Care Services in Bergenfield, NJ</h1>
         <span
           className="mt-4 mx-auto block h-1.5 w-28 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-500"
           data-reveal-line

@@ -8,12 +8,17 @@ import { ScrollTrigger } from "@/lib/gsap";
 import { MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import { BRAND, IMAGES, LOCATIONS, MAPS_LINK_NEW_BRIDGE } from "@/lib/brand";
 import ContactForm from "@/components/ContactForm";
+import Seo from "@/components/Seo";
 
 const contactSlides = [
   { src: IMAGES.contactSideA, alt: "Bergen Laundry Service delivery van" },
   {
     src: IMAGES.contactSideB,
     alt: "New Bridge Laundromat — self-serve dryers and folding area",
+  },
+  {
+    src: IMAGES.contactSlideNew,
+    alt: "Bergen Laundry Service branded van parked outside the storefront",
   },
 ];
 
@@ -46,6 +51,12 @@ export default function Contact() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
+      <Seo
+        title="Contact Singh Laundry | Bergenfield, NJ"
+        description="Get in touch with Singh Laundry for wash & fold, pickup & delivery, or self-serve laundromat questions in Bergenfield, NJ and surrounding towns."
+        path="/contact"
+        image={IMAGES.logoSingh}
+      />
       <section className="page-hero-section pb-6" data-reveal-blur>
         <h1 className="h1">We&apos;d love to hear from you</h1>
         <span
@@ -82,7 +93,7 @@ export default function Contact() {
                 Open map →
               </span>
             </motion.a>
-            <motion.div className="lg:hidden relative rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover h-52">
+            <motion.div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover h-52 lg:h-72">
               <img
                 src={contactSlides[slide].src}
                 alt={contactSlides[slide].alt}
@@ -120,26 +131,6 @@ export default function Contact() {
                 ))}
               </motion.div>
             </motion.div>
-          </motion.div>
-          <motion.div
-            className="hidden lg:block rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover"
-            data-reveal
-          >
-            <img
-              src={IMAGES.contactSideA}
-              alt="Bergen Laundry Service delivery van"
-              className="w-full h-52 object-cover"
-            />
-          </motion.div>
-          <motion.div
-            className="hidden lg:block rounded-2xl overflow-hidden border border-slate-200 shadow-md card-hover"
-            data-reveal
-          >
-            <img
-              src={IMAGES.contactSideB}
-              alt="New Bridge Laundromat — self-serve dryers and folding area"
-              className="w-full h-52 object-cover"
-            />
           </motion.div>
         </motion.div>
         <motion.div className="order-1 lg:order-2" data-reveal-scale>

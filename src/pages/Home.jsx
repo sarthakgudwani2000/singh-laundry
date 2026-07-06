@@ -23,7 +23,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 //   Truck,
 // } from "lucide-react";
 // import SpecialItemsDialog from "@/components/SpecialItemsDialog";
-import { IMAGES } from "@/lib/brand";
+import { IMAGES, ORG_JSON_LD } from "@/lib/brand";
+import Seo from "@/components/Seo";
 // import {
 //   BRAND,
 //   PRICING,
@@ -145,6 +146,13 @@ export default function Home() {
 
   return (
     <div ref={homeRootRef} data-testid="home-page">
+      <Seo
+        title="Singh Laundry – Laundry Service & Pickup in Bergenfield, NJ"
+        description="Singh Laundry serves Bergenfield, NJ with wash & fold, free pickup & delivery, and self-serve laundromat care across Bergen County. Get started today."
+        path="/"
+        image={IMAGES.logoSingh}
+        jsonLd={ORG_JSON_LD}
+      />
       {/* <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} /> */}
       <section
         ref={heroRef}

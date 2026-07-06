@@ -7,6 +7,7 @@ import {
 } from "@/hooks/useGsapPageAnimations";
 import { BRAND, IMAGES, SCHEDULE_ORDER_URL } from "@/lib/brand";
 import { getAboutParagraphs, SERVICE_AREA_LINES } from "@/lib/templateCopy";
+import Seo from "@/components/Seo";
 
 export default function About() {
   const pageRef = useRef(null);
@@ -40,8 +41,14 @@ export default function About() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
+      <Seo
+        title="About Singh Laundry | Bergenfield, NJ Laundry Company"
+        description="Learn about Singh Laundry, the Bergenfield, NJ company behind Bergen Laundry Service and New Bridge Laundromat, serving Bergen County & North Jersey."
+        path="/about"
+        image={IMAGES.logoSingh}
+      />
       <section className="page-hero-section" data-reveal-blur>
-        <h1 className="h1">About Us</h1>
+        <h1 className="h1">About Singh Laundry</h1>
         <span
           className="mt-4 mx-auto block h-1.5 w-28 rounded-full bg-gradient-to-r from-blue-600 to-sky-500"
           data-reveal-line

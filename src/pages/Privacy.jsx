@@ -5,7 +5,8 @@ import {
   useGsapFloatAccents,
   useGsapScrollReveal,
 } from "@/hooks/useGsapPageAnimations";
-import { BRAND } from "@/lib/brand";
+import { BRAND, IMAGES } from "@/lib/brand";
+import Seo from "@/components/Seo";
 
 export default function Privacy() {
   const pageRef = useRef(null);
@@ -22,6 +23,12 @@ export default function Privacy() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
+      <Seo
+        title="Privacy Policy | Singh Laundry"
+        description="Read Singh Laundry's privacy policy to understand how we collect, use, and protect your information across our Bergenfield, NJ laundry services."
+        path="/privacy"
+        image={IMAGES.logoSingh}
+      />
       <div data-reveal-clip>
         <p className="overline mb-3">Singh Laundry</p>
         <h1 className="h1">Privacy Policy</h1>

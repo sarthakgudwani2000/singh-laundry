@@ -17,6 +17,7 @@ import {
   SCHEDULE_ORDER_URL,
 } from "@/lib/brand";
 import SpecialItemsDialog from "@/components/SpecialItemsDialog";
+import Seo from "@/components/Seo";
 
 const pricing = [
   {
@@ -30,6 +31,8 @@ const pricing = [
 ];
 
 const bergenSlides = [
+  { src: IMAGES.bergenVanWrapSlide1, alt: "Newly wrapped Bergen Laundry Service van outside the Bergenfield storefront" },
+  { src: IMAGES.bergenVanWrapSlide2, alt: "Newly wrapped Bergen Laundry Service van, side view" },
   { src: IMAGES.bergenPromoVan, alt: "Bergen Laundry Service van and driver" },
   { src: IMAGES.aboutBanner, alt: "Bergenfield laundry facility" },
   { src: IMAGES.bergenPickupAside, alt: "Folded laundry ready for pickup orders", hidden: true },
@@ -63,14 +66,6 @@ export default function BergenLaundry() {
   });
 
   useEffect(() => {
-    const prev = document.title;
-    document.title = `${BRAND.pickup} | ${BRAND.parent}`;
-    return () => {
-      document.title = prev;
-    };
-  }, []);
-
-  useEffect(() => {
     if (hash === "#special-items") {
       startTransition(() => setSpecialOpen(true));
       return;
@@ -97,6 +92,12 @@ export default function BergenLaundry() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
+      <Seo
+        title="Bergen Laundry Service | Pickup & Delivery | Singh Laundry"
+        description="Bergen Laundry Service offers free wash & fold pickup and delivery across Bergenfield and North Jersey. A Singh Laundry brand. Schedule your pickup today."
+        path="/bergen-laundry-service"
+        image={IMAGES.logoBergen}
+      />
       <SpecialItemsDialog open={specialOpen} onClose={() => setSpecialOpen(false)} />
 
       <section className="page-hero-section pb-5 max-w-5xl" data-reveal-blur>
